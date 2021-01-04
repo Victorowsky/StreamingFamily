@@ -1,0 +1,33 @@
+input {
+  padding: 15px 20px;
+}
+.signIn {
+  display: flex;
+  justify-content: flex-end;
+}
+.forms {
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+  justify-content: flex-end;
+}
+
+.forms input {
+  border-radius: 5px;
+  border: 2px solid grey;
+  outline: none;
+  margin: 2px;
+  transition: 0.5s;
+  font-size: 18px;
+}
+
+.forms input:focus {
+  border: 2px solid #4361ee;
+}
+
+.signInContainer {
+  width: fit-content;
+  background-color: white;
+  border-radius: 5px;
+  padding: 15px 20px;
+}

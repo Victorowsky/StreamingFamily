@@ -1,0 +1,21 @@
+.party {
+  border: 2px solid white;
+  padding: 15px 20px;
+  border-radius: 5px;
+  color: white;
+  margin: 5px;
+  transition: 0.5s;
+}
+.partiesContainer {
+  color: white;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+.Parties {
+  color: white;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+}
