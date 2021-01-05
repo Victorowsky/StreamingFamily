@@ -1,23 +1,19 @@
-import "./SignUp.css";
-import { useState, useEffect } from "react";
+// import "./SignUp.css";
+import { useEffect, useState } from "react";
 import Button from "@material-ui/core/Button";
-import Error from "./ErrorSnackbar";
-import Success from "./SuccessSnackbar";
-import { Link } from "react-router-dom";
-import Checkbox from "./Checkbox";
+import Error from "../SignUp/ErrorSnackbar";
+import Success from "../SignUp/SuccessSnackbar";
+import { Link, useHistory } from "react-router-dom";
 import anime from "animejs/lib/anime.es.js";
 
-const SignUp = ({ socket }) => {
-  const [name, setName] = useState();
+const SignUp = ({ socket, setUserID, setNickname }) => {
   const [username, setUsername] = useState();
   const [password, setPassword] = useState();
-  const [email, setEmail] = useState();
-  const [errorMessage, setErrorMessage] = useState("Try again!");
+  const [errorMessage, setErrorMessage] = useState("");
   const [isError, setIsError] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
-  const [checked, setChecked] = useState(false);
-
+  const history = useHistory();
   const [isHover, setIsHover] = useState(false);
   const [isHoverBack, setIsHoverBack] = useState(false);
 
@@ -60,34 +56,29 @@ const SignUp = ({ socket }) => {
     });
   }, []);
 
-  const handleSignUp = () => {
-    if (name && username && password && email) {
-      if (!email.includes("@")) {
-        setErrorMessage("Check your email");
-        return setIsError(true);
-      } else if (!checked) {
-        setErrorMessage("Accept everything");
-        return setIsError(true);
-      }
-      socket.emit("SignUpData", {
-        name,
+  const handleLogin = () => {
+    if (username && password) {
+      socket.emit("Login", {
         username,
         password,
-        email,
       });
     } else {
+      setErrorMessage("Check your details again");
       setIsError(true);
     }
   };
 
-  socket.on("SignUpAnswer", (answer) => {
+  socket.on("LoginAnswer", (answer) => {
     if (answer.success) {
-      setIsSuccess(true);
-      setName("");
+      setUserID(answer.userID);
+      setNickname(username);
       setUsername("");
       setPassword("");
-      setEmail("");
+      setIsSuccess(true);
       setSuccessMessage(answer.message);
+      setTimeout(() => {
+        history.push("/");
+      }, 1500);
     } else {
       setErrorMessage(answer.message);
       setIsError(true);
@@ -115,17 +106,9 @@ const SignUp = ({ socket }) => {
       <div className="content">
         <div style={{ display: "flex", flexDirection: "column" }}>
           <div className="signInContainer">
-            <h1>Create free account</h1>
+            <h1>Log in to your account</h1>
             <div className="signUp">
               <form autoComplete="off" className="forms">
-                <input
-                  autoComplete="nope"
-                  type="text"
-                  name="name"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                  placeholder="Name"
-                />
                 <input
                   type="text"
                   name="username"
@@ -141,19 +124,10 @@ const SignUp = ({ socket }) => {
                   value={password}
                   placeholder="Password"
                 />
-                <input
-                  autoComplete="off"
-                  type="email"
-                  name="email"
-                  onChange={(e) => setEmail(e.target.value)}
-                  value={email}
-                  placeholder="Email"
-                />
-                <Checkbox checked={checked} setChecked={setChecked} />
                 <button
                   onClick={(e) => {
                     e.preventDefault();
-                    handleSignUp();
+                    handleLogin();
                   }}
                   style={{ display: "none" }}
                   type="submit"
@@ -164,15 +138,14 @@ const SignUp = ({ socket }) => {
                     setIsHover(false);
                   }}
                   variant="outlined"
-                  disabled={!checked}
                   style={
                     isHover
                       ? buttonStyleHoverCreateAccount
                       : buttonStyleCreateAccount
                   }
-                  onClick={handleSignUp}
+                  onClick={handleLogin}
                 >
-                  Create Account
+                  Login
                 </Button>
               </form>
             </div>

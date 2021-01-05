@@ -1,8 +1,11 @@
 const Netflix = () => {
-    return ( 
-        <div>
+    return (
+        <div className="content">
+                    <div>
             Spotify
         </div>
+        </div> 
+
      );
 }
  

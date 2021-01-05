@@ -38,10 +38,13 @@ const Netflix = () => {
   ));
 
   return (
-    <div className="partiesContainer">
+    <div className="content">
+          <div className="partiesContainer">
       <h1>Netflix Families</h1>
       <div className="Parties">{list}</div>
     </div>
+    </div>
+
   );
 };
 

@@ -16,12 +16,12 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function CustomizedSnackbars({setIsError, isError, errorMessage}) {
+export default function CustomizedSnackbars({setIsSuccess, isSuccess,successMessage}) {
   const classes = useStyles();
   // const [open, setOpen] = React.useState(true);
 
   // const handleClick = () => {
-  //   setIsError(true);
+  //   setIsSuccess(true);
   // };
 
 
@@ -31,14 +31,14 @@ export default function CustomizedSnackbars({setIsError, isError, errorMessage})
       return;
     }
 
-    setIsError(false);
+    setIsSuccess(false);
   };
 
   return (
     <div className={classes.root}>
-      <Snackbar open={isError} autoHideDuration={6000} onClose={handleClose}>
-        <Alert onClose={()=>setIsError(false)} severity="error">
-          {errorMessage}
+      <Snackbar open={isSuccess} autoHideDuration={6000} onClose={handleClose}>
+        <Alert onClose={()=>setIsSuccess(false)} severity="success">
+          {successMessage}
         </Alert>
       </Snackbar>
     </div>

@@ -1,60 +1,43 @@
 import "./App.css";
 import io from "socket.io-client";
 import Homepage from "./comp/Homepage";
-import { Switch, Route, Link } from "react-router-dom";
+import { Switch, Route } from "react-router-dom";
 import Netflix from "./comp/Netflix";
 import Spotify from "./comp/Spotify";
 // import HBOGO from "./comp/HBOGO";
 // import Disney from "./comp/Disney";
-import { useEffect } from "react";
+import { useState } from "react";
 import SignUp from "./comp/SignUp/SignUp";
-import ButtonSignUp from "./comp/SignUp/ButtonSignUp";
-import { Button } from "@material-ui/core";
+import Login from "./comp/Login/Login";
 
 const socket = io("http://localhost:3001/");
 
 function App() {
-  useEffect(() => {}, []);
-
-  const buttonStyle = {
-    color: "white",
-    borderColor: "white",
-    width: "fit-content",
-    alignSelf: "center",
-  };
+  const [userID, setUserID] = useState();
+  const [nickname, setNickname] = useState();
 
   return (
     <>
       <div className="app">
-        <div className="header">
-          <Route path='/signup'  exact>
-            <Link to="/">
-            <Button variant="outlined" style={buttonStyle}>
-              Back
-            </Button>
-          </Link>
-          </Route>
-          
+        <Switch>
           <Route path="/" exact>
-          <Link to="/signup">
-            <ButtonSignUp />
-          </Link>
+            <Homepage userID={userID} nickname={nickname} />
           </Route>
-
-        </div>
-
-        <div className="content">
-          <Switch>
-            <Route path="/" exact component={Homepage} />
-            <Route path="/signup" exact>
-              <SignUp socket={socket} />
-            </Route>
-            <Route path="/netflix" component={Netflix} />
-            <Route path="/Spotify" component={Spotify} />
-            {/* <Route path="/HBO GO" component={HBOGO} /> */}
-            {/* <Route path="/Disney+" component={Disney} /> */}
-          </Switch>
-        </div>
+          <Route path="/signup" exact>
+            <SignUp socket={socket} />
+          </Route>
+          <Route path="/login">
+            <Login
+              socket={socket}
+              setUserID={setUserID}
+              setNickname={setNickname}
+            />
+          </Route>
+          <Route path="/netflix" component={Netflix} />
+          <Route path="/Spotify" component={Spotify} />
+          {/* <Route path="/HBO GO" component={HBOGO} /> */}
+          {/* <Route path="/Disney+" component={Disney} /> */}
+        </Switch>
       </div>
     </>
   );

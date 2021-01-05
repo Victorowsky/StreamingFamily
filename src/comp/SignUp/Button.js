@@ -4,27 +4,26 @@ import Button from "@material-ui/core/Button";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    // justifySelf: 'flex-end',
     "& > *": {
-      // margin: theme.spacing(1),
       borderColor: "white",
       color: "white",
       transtion: "1s",
+      margin: '5px'
     },
     "& > *:hover": {
-      borderColor: "yellow",
-      boxShadow: "2px 2px 10px yellow",
+      borderColor: "white",
+      boxShadow: "2px 2px 10px white",
     },
   },
 }));
 
-export default function OutlinedButtons({ handleSignUp }) {
+export default function OutlinedButtons({ handleSignUp, text  }) {
   const classes = useStyles();
 
   return (
     <div className={classes.root}>
-      <Button variant="outlined">
-        Sign Up
+      <Button variant="outlined" >
+        {text}
       </Button>
     </div>
   );

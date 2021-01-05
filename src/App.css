@@ -57,6 +57,7 @@
   display: flex;
   /* justify-content: space-between; */
   align-items: center;
+  border-spacing: 15px;
 }
 
 a {
