@@ -2,20 +2,34 @@ import StreamingOffer from "./StreamingOffer";
 import Title from "./Title";
 import { Link } from "react-router-dom";
 import Button from "./SignUp/Button";
+import Cookies from "js-cookie";
 
-const Homepage = ({ userID, nickname }) => {
+const Homepage = ({ userID, nickname, setNickname, setUserID }) => {
+  const handleLogOut = () => {
+    setNickname(null);
+    setUserID(null);
+    Cookies.remove("userID");
+  };
+
   return (
     <>
       <div className="header">
-        <Link to="/login">
-          {!nickname ? <Button text={"Login"} /> : <Button text={nickname} />}
-        </Link>
+        {!nickname ? (
+          <Link to="/login">
+            <Button text={"Login"} />{" "}
+          </Link>
+        ) : (
+          <Link to="/profile">
+            <Button text={nickname} />
+          </Link>
+        )}
+
         {!nickname ? (
           <Link to="/signup">
             <Button text={"Sign Up"} />
           </Link>
         ) : (
-          <Button text={"Log Out"} />
+          <Button text={"LogOut"} onClick={handleLogOut} />
         )}
       </div>
 

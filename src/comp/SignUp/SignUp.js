@@ -1,11 +1,12 @@
 import "./SignUp.css";
 import { useState, useEffect } from "react";
-import Button from "@material-ui/core/Button";
+import Button2 from "@material-ui/core/Button";
 import Error from "./ErrorSnackbar";
 import Success from "./SuccessSnackbar";
 import { Link } from "react-router-dom";
 import Checkbox from "./Checkbox";
 import anime from "animejs/lib/anime.es.js";
+import Button from "./Button";
 
 const SignUp = ({ socket }) => {
   const [name, setName] = useState();
@@ -35,21 +36,6 @@ const SignUp = ({ socket }) => {
     width: "fit-content",
     alignSelf: "center",
     backgroundColor: "#4361ee",
-  };
-
-  const buttonStyleBack = {
-    color: "white",
-    borderColor: "white",
-    width: "fit-content",
-    alignSelf: "center",
-  };
-
-  const buttonStyleHoverBack = {
-    color: "white",
-    borderColor: "white",
-    width: "fit-content",
-    alignSelf: "center",
-    boxShadow: "2px 2px 10px white",
   };
 
   useEffect(() => {
@@ -98,18 +84,7 @@ const SignUp = ({ socket }) => {
     <>
       <div className="header">
         <Link to="/">
-          <Button
-            onMouseOver={() => {
-              setIsHoverBack(true);
-            }}
-            onMouseLeave={() => {
-              setIsHoverBack(false);
-            }}
-            variant="outlined"
-            style={isHoverBack ? buttonStyleHoverBack : buttonStyleBack}
-          >
-            Back
-          </Button>
+          <Button variant="outlined" text={"Back"} />
         </Link>
       </div>
       <div className="content">
@@ -158,7 +133,7 @@ const SignUp = ({ socket }) => {
                   style={{ display: "none" }}
                   type="submit"
                 ></button>
-                <Button
+                <Button2
                   onMouseOver={() => setIsHover(true)}
                   onMouseOut={() => {
                     setIsHover(false);
@@ -173,7 +148,7 @@ const SignUp = ({ socket }) => {
                   onClick={handleSignUp}
                 >
                   Create Account
-                </Button>
+                </Button2>
               </form>
             </div>
           </div>

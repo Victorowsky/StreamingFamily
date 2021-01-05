@@ -13,16 +13,18 @@ const useStyles = makeStyles((theme) => ({
     "& > *:hover": {
       borderColor: "white",
       boxShadow: "2px 2px 10px white",
+      backgroundColor: 'white',
+      color:'black'
     },
   },
 }));
 
-export default function OutlinedButtons({ handleSignUp, text  }) {
+export default function OutlinedButtons({ handleSignUp, text, onClick  }) {
   const classes = useStyles();
 
   return (
     <div className={classes.root}>
-      <Button variant="outlined" >
+      <Button variant="outlined" onClick={onClick}>
         {text}
       </Button>
     </div>

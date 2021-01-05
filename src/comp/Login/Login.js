@@ -1,10 +1,12 @@
 // import "./SignUp.css";
 import { useEffect, useState } from "react";
-import Button from "@material-ui/core/Button";
+import Button2 from "@material-ui/core/Button";
 import Error from "../SignUp/ErrorSnackbar";
 import Success from "../SignUp/SuccessSnackbar";
 import { Link, useHistory } from "react-router-dom";
 import anime from "animejs/lib/anime.es.js";
+import Button from "../SignUp/Button";
+import Cookies from "js-cookie";
 
 const SignUp = ({ socket, setUserID, setNickname }) => {
   const [username, setUsername] = useState();
@@ -15,7 +17,6 @@ const SignUp = ({ socket, setUserID, setNickname }) => {
   const [successMessage, setSuccessMessage] = useState("");
   const history = useHistory();
   const [isHover, setIsHover] = useState(false);
-  const [isHoverBack, setIsHoverBack] = useState(false);
 
   const buttonStyleCreateAccount = {
     marginTop: "5px",
@@ -33,19 +34,8 @@ const SignUp = ({ socket, setUserID, setNickname }) => {
     backgroundColor: "#4361ee",
   };
 
-  const buttonStyleBack = {
-    color: "white",
-    borderColor: "white",
-    width: "fit-content",
-    alignSelf: "center",
-  };
-
-  const buttonStyleHoverBack = {
-    color: "white",
-    borderColor: "white",
-    width: "fit-content",
-    alignSelf: "center",
-    boxShadow: "2px 2px 10px white",
+  const handleCookies = (ID) => {
+    Cookies.set("userID", ID, { expires: 3 });
   };
 
   useEffect(() => {
@@ -76,6 +66,7 @@ const SignUp = ({ socket, setUserID, setNickname }) => {
       setPassword("");
       setIsSuccess(true);
       setSuccessMessage(answer.message);
+      handleCookies(answer.userID);
       setTimeout(() => {
         history.push("/");
       }, 1500);
@@ -89,18 +80,7 @@ const SignUp = ({ socket, setUserID, setNickname }) => {
     <>
       <div className="header">
         <Link to="/">
-          <Button
-            onMouseOver={() => {
-              setIsHoverBack(true);
-            }}
-            onMouseLeave={() => {
-              setIsHoverBack(false);
-            }}
-            variant="outlined"
-            style={isHoverBack ? buttonStyleHoverBack : buttonStyleBack}
-          >
-            Back
-          </Button>
+          <Button variant="outlined" text={"Back"} />
         </Link>
       </div>
       <div className="content">
@@ -132,7 +112,7 @@ const SignUp = ({ socket, setUserID, setNickname }) => {
                   style={{ display: "none" }}
                   type="submit"
                 ></button>
-                <Button
+                <Button2
                   onMouseOver={() => setIsHover(true)}
                   onMouseOut={() => {
                     setIsHover(false);
@@ -146,7 +126,7 @@ const SignUp = ({ socket, setUserID, setNickname }) => {
                   onClick={handleLogin}
                 >
                   Login
-                </Button>
+                </Button2>
               </form>
             </div>
           </div>
