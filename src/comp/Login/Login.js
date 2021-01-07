@@ -60,13 +60,13 @@ const SignUp = ({ socket, setUserID, setNickname }) => {
 
   socket.on("LoginAnswer", (answer) => {
     if (answer.success) {
-      setUserID(answer.userID);
       setNickname(username);
       setUsername("");
       setPassword("");
       setIsSuccess(true);
       setSuccessMessage(answer.message);
       handleCookies(answer.userID);
+      setUserID(answer.userID);
       setTimeout(() => {
         history.push("/");
       }, 1500);

@@ -3,12 +3,13 @@ import { useState, useEffect } from "react";
 import Button2 from "@material-ui/core/Button";
 import Error from "./ErrorSnackbar";
 import Success from "./SuccessSnackbar";
-import { Link } from "react-router-dom";
+import { Link  } from "react-router-dom";
 import Checkbox from "./Checkbox";
 import anime from "animejs/lib/anime.es.js";
 import Button from "./Button";
 
-const SignUp = ({ socket }) => {
+
+const SignUp = ({ socket}) => {
   const [name, setName] = useState();
   const [username, setUsername] = useState();
   const [password, setPassword] = useState();
@@ -19,8 +20,8 @@ const SignUp = ({ socket }) => {
   const [successMessage, setSuccessMessage] = useState("");
   const [checked, setChecked] = useState(false);
 
+
   const [isHover, setIsHover] = useState(false);
-  const [isHoverBack, setIsHoverBack] = useState(false);
 
   const buttonStyleCreateAccount = {
     marginTop: "5px",
@@ -54,6 +55,9 @@ const SignUp = ({ socket }) => {
       } else if (!checked) {
         setErrorMessage("Accept everything");
         return setIsError(true);
+      } else if (password.length < 6) {
+        setErrorMessage("Password is to short");
+        return setIsError(true);
       }
       socket.emit("SignUpData", {
         name,
@@ -80,80 +84,94 @@ const SignUp = ({ socket }) => {
     }
   });
 
+
+  socket.on('sendValidationCodeAnswer', ({message, success})=>{
+    if(success){
+      setSuccessMessage(message)
+    }else{
+      setErrorMessage(message)
+      setIsError(true)
+    }
+
+})
+
   return (
     <>
+
       <div className="header">
         <Link to="/">
           <Button variant="outlined" text={"Back"} />
         </Link>
       </div>
-      <div className="content">
-        <div style={{ display: "flex", flexDirection: "column" }}>
-          <div className="signInContainer">
-            <h1>Create free account</h1>
-            <div className="signUp">
-              <form autoComplete="off" className="forms">
-                <input
-                  autoComplete="nope"
-                  type="text"
-                  name="name"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                  placeholder="Name"
-                />
-                <input
-                  type="text"
-                  name="username"
-                  value={username}
-                  onChange={(e) => setUsername(e.target.value)}
-                  placeholder="Username"
-                />
-                <input
-                  autoComplete="off"
-                  type="password"
-                  name="password"
-                  onChange={(e) => setPassword(e.target.value)}
-                  value={password}
-                  placeholder="Password"
-                />
-                <input
-                  autoComplete="off"
-                  type="email"
-                  name="email"
-                  onChange={(e) => setEmail(e.target.value)}
-                  value={email}
-                  placeholder="Email"
-                />
-                <Checkbox checked={checked} setChecked={setChecked} />
-                <button
-                  onClick={(e) => {
-                    e.preventDefault();
-                    handleSignUp();
-                  }}
-                  style={{ display: "none" }}
-                  type="submit"
-                ></button>
-                <Button2
-                  onMouseOver={() => setIsHover(true)}
-                  onMouseOut={() => {
-                    setIsHover(false);
-                  }}
-                  variant="outlined"
-                  disabled={!checked}
-                  style={
-                    isHover
-                      ? buttonStyleHoverCreateAccount
-                      : buttonStyleCreateAccount
-                  }
-                  onClick={handleSignUp}
-                >
-                  Create Account
-                </Button2>
-              </form>
+          <div className="content">
+          <div style={{ display: "flex", flexDirection: "column" }}>
+            <div className="signInContainer">
+              <h1>Create free account</h1>
+              <div className="signUp">
+                <form autoComplete="off" className="forms">
+                  <input
+                    autoComplete="nope"
+                    type="text"
+                    name="name"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    placeholder="Name"
+                  />
+                  <input
+                    type="text"
+                    name="username"
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)}
+                    placeholder="Username"
+                  />
+                  <input
+                    autoComplete="off"
+                    type="password"
+                    name="password"
+                    onChange={(e) => setPassword(e.target.value)}
+                    value={password}
+                    placeholder="Password"
+                  />
+                  <input
+                    autoComplete="off"
+                    type="email"
+                    name="email"
+                    onChange={(e) => setEmail(e.target.value)}
+                    value={email}
+                    placeholder="Email"
+                  />
+                  <Checkbox checked={checked} setChecked={setChecked} />
+                  <button
+                    onClick={(e) => {
+                      e.preventDefault();
+                      handleSignUp();
+                    }}
+                    style={{ display: "none" }}
+                    type="submit"
+                  ></button>
+                  <Button2
+                    onMouseOver={() => setIsHover(true)}
+                    onMouseOut={() => {
+                      setIsHover(false);
+                    }}
+                    variant="outlined"
+                    disabled={!checked}
+                    style={
+                      isHover
+                        ? buttonStyleHoverCreateAccount
+                        : buttonStyleCreateAccount
+                    }
+                    onClick={handleSignUp}
+                  >
+                    Create Account
+                  </Button2>
+                </form>
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      
+  
       <Error
         setIsError={setIsError}
         isError={isError}

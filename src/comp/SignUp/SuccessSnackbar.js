@@ -38,7 +38,7 @@ export default function CustomizedSnackbars({setIsSuccess, isSuccess,successMess
     <div className={classes.root}>
       <Snackbar open={isSuccess} autoHideDuration={6000} onClose={handleClose}>
         <Alert onClose={()=>setIsSuccess(false)} severity="success">
-          {successMessage}
+          {successMessage ? successMessage : "Success"}
         </Alert>
       </Snackbar>
     </div>

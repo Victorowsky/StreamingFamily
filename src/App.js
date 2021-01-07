@@ -10,12 +10,17 @@ import Spotify from "./comp/Spotify";
 import { useEffect, useState } from "react";
 import SignUp from "./comp/SignUp/SignUp";
 import Login from "./comp/Login/Login";
+import Account from './comp/Account/Account';
+import ConfirmAccount from './comp/SignUp/ConfirmAccount';
+import Success from './comp/SignUp/SuccessSnackbar';
 
 const socket = io("http://localhost:3001/");
 
 function App() {
   const [userID, setUserID] = useState();
   const [nickname, setNickname] = useState();
+  const [userData, setUserData] = useState();
+  const [refreshData, setRefreshData] = useState(1)
 
   const handleCookies = () => {
     if (Cookies.get("userID")) {
@@ -26,42 +31,58 @@ function App() {
     }
   };
 
-  socket.on("CheckUserIDAnswer", (nickname) => {
-    setNickname(nickname);
+  socket.on("CheckUserIDAnswer", (data) => {
+    setUserData(data)
+    setNickname(data.username)
   });
+
+
+
 
   useEffect(() => {
     handleCookies();
-  });
+  },[userID, refreshData]);
+
+
 
   return (
     <>
-      <div className="app">
-        <Switch>
-          <Route path="/" exact>
-            <Homepage
-              userID={userID}
-              nickname={nickname}
-              setUserID={setUserID}
-              setNickname={setNickname}
-            />
-          </Route>
-          <Route path="/signup" exact>
-            <SignUp socket={socket} />
-          </Route>
-          <Route path="/login">
-            <Login
-              socket={socket}
-              setUserID={setUserID}
-              setNickname={setNickname}
-            />
-          </Route>
-          <Route path="/netflix" component={Netflix} />
-          <Route path="/Spotify" component={Spotify} />
-          {/* <Route path="/HBO GO" component={HBOGO} /> */}
-          {/* <Route path="/Disney+" component={Disney} /> */}
-        </Switch>
-      </div>
+    
+    <div className="app">
+    <Switch>
+      <Route path="/" exact>
+        <Homepage
+          userID={userID}
+          nickname={nickname}
+          setUserID={setUserID}
+          setNickname={setNickname}
+          setUserData={setUserData}
+        />
+      </Route>
+      <Route path="/signup" exact>
+        <SignUp socket={socket} userID={userID} />
+      </Route>
+      <Route path="/login">
+        <Login
+          socket={socket}
+          setUserID={setUserID}
+          setNickname={setNickname}
+        />
+        </Route>
+        <Route path="/account">
+        {userData && <Account nickname={nickname} userData={userData}/>}  
+        </Route>
+      <Route path="/activate">
+        <ConfirmAccount setRefreshData={setRefreshData} socket={socket} userID={userID}/>
+      </Route>
+      <Route path="/netflix" component={Netflix} />
+      <Route path="/Spotify" component={Spotify} />
+      {/* <Route path="/HBO GO" component={HBOGO} /> */}
+      {/* <Route path="/Disney+" component={Disney} /> */}
+    </Switch>
+  </div>
+
+      <Success isSuccess={false} successMessage={'Logged in!'}/>
     </>
   );
 }

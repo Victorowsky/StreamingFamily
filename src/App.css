@@ -12,6 +12,24 @@
   height: fit-content;
   text-align: center;
 }
+.confirmAccount {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100vh;
+  flex-direction: column;
+  text-align: center;
+}
+
+input {
+  border-radius: 5px;
+  border: 2px solid grey;
+  outline: none;
+  margin: 2px;
+  transition: 0.5s;
+  font-size: 18px;
+}
 
 .homepage {
   display: flex;

@@ -4,11 +4,12 @@ import { Link } from "react-router-dom";
 import Button from "./SignUp/Button";
 import Cookies from "js-cookie";
 
-const Homepage = ({ userID, nickname, setNickname, setUserID }) => {
+const Homepage = ( {nickname, setNickname, setUserID, setUserData }) => {
   const handleLogOut = () => {
     setNickname(null);
     setUserID(null);
     Cookies.remove("userID");
+    setUserData(null)
   };
 
   return (
@@ -19,7 +20,7 @@ const Homepage = ({ userID, nickname, setNickname, setUserID }) => {
             <Button text={"Login"} />{" "}
           </Link>
         ) : (
-          <Link to="/profile">
+          <Link to="/account">
             <Button text={nickname} />
           </Link>
         )}
