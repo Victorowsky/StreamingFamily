@@ -2,19 +2,17 @@
 import { useEffect, useState } from "react";
 import Button2 from "@material-ui/core/Button";
 import Error from "../SignUp/ErrorSnackbar";
-import Success from "../SignUp/SuccessSnackbar";
+// import Success from "../SignUp/SuccessSnackbar";
 import { Link, useHistory } from "react-router-dom";
 import anime from "animejs/lib/anime.es.js";
 import Button from "../SignUp/Button";
 import Cookies from "js-cookie";
 
-const SignUp = ({ socket, setUserID, setNickname }) => {
+const Login = ({ socket, setUserID, setNickname,setIsSuccess,setSuccessMessage }) => {
   const [username, setUsername] = useState();
   const [password, setPassword] = useState();
   const [errorMessage, setErrorMessage] = useState("");
   const [isError, setIsError] = useState(false);
-  const [isSuccess, setIsSuccess] = useState(false);
-  const [successMessage, setSuccessMessage] = useState("");
   const history = useHistory();
   const [isHover, setIsHover] = useState(false);
 
@@ -69,7 +67,7 @@ const SignUp = ({ socket, setUserID, setNickname }) => {
       setUserID(answer.userID);
       setTimeout(() => {
         history.push("/");
-      }, 1500);
+      }, 1);
     } else {
       setErrorMessage(answer.message);
       setIsError(true);
@@ -137,13 +135,13 @@ const SignUp = ({ socket, setUserID, setNickname }) => {
         isError={isError}
         errorMessage={errorMessage}
       />
-      <Success
+      {/* <Success
         isSuccess={isSuccess}
         setIsSuccess={setIsSuccess}
         successMessage={successMessage}
-      />
+      /> */}
     </>
   );
 };
 
-export default SignUp;
+export default Login;

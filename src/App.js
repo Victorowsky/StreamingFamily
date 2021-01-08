@@ -21,6 +21,9 @@ function App() {
   const [nickname, setNickname] = useState();
   const [userData, setUserData] = useState();
   const [refreshData, setRefreshData] = useState(1)
+  const [isSuccess, setIsSuccess] = useState(false);
+  const [successMessage, setSuccessMessage] = useState("");
+
 
   const handleCookies = () => {
     if (Cookies.get("userID")) {
@@ -60,13 +63,23 @@ function App() {
         />
       </Route>
       <Route path="/signup" exact>
-        <SignUp socket={socket} userID={userID} />
+        <SignUp 
+          socket={socket} 
+          userID={userID}           
+          isSuccess={isSuccess}
+          setIsSuccess={setIsSuccess}
+          successMessage={successMessage}
+          setSuccessMessage={setSuccessMessage} />
       </Route>
       <Route path="/login">
         <Login
           socket={socket}
           setUserID={setUserID}
           setNickname={setNickname}
+          isSuccess={isSuccess}
+          setIsSuccess={setIsSuccess}
+          successMessage={successMessage}
+          setSuccessMessage={setSuccessMessage}
         />
         </Route>
         <Route path="/account">
@@ -82,7 +95,7 @@ function App() {
     </Switch>
   </div>
 
-      <Success isSuccess={false} successMessage={'Logged in!'}/>
+      <Success isSuccess={isSuccess} setIsSuccess={setIsSuccess} successMessage={'Logged in!'}/>
     </>
   );
 }

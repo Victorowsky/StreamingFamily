@@ -34,7 +34,8 @@ const Profile = ({nickname, userData}) => {
                 
               
               {isVerified ? 
-              <div style={{color :'#90be6d'}}>Your account is verifed</div> 
+              <div style={{color :'#90be6d'}}>Your account is verifed
+              </div> 
               : 
               <Link to="/activate">
                 <div style={{color:'#f94144'}}>Your account is not verifed! Check your email!</div>

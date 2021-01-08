@@ -17,7 +17,7 @@ const Homepage = ( {nickname, setNickname, setUserID, setUserData }) => {
       <div className="header">
         {!nickname ? (
           <Link to="/login">
-            <Button text={"Login"} />{" "}
+            <Button text={"Login"} />
           </Link>
         ) : (
           <Link to="/account">

@@ -2,23 +2,23 @@ import "./SignUp.css";
 import { useState, useEffect } from "react";
 import Button2 from "@material-ui/core/Button";
 import Error from "./ErrorSnackbar";
-import Success from "./SuccessSnackbar";
 import { Link  } from "react-router-dom";
 import Checkbox from "./Checkbox";
 import anime from "animejs/lib/anime.es.js";
 import Button from "./Button";
+import { useHistory } from "react-router-dom";
 
 
-const SignUp = ({ socket}) => {
+
+const SignUp = ({ socket, setIsSuccess, setSuccessMessage}) => {
   const [name, setName] = useState();
   const [username, setUsername] = useState();
   const [password, setPassword] = useState();
   const [email, setEmail] = useState();
   const [errorMessage, setErrorMessage] = useState("Try again!");
   const [isError, setIsError] = useState(false);
-  const [isSuccess, setIsSuccess] = useState(false);
-  const [successMessage, setSuccessMessage] = useState("");
   const [checked, setChecked] = useState(false);
+  const history = useHistory();
 
 
   const [isHover, setIsHover] = useState(false);
@@ -78,6 +78,9 @@ const SignUp = ({ socket}) => {
       setPassword("");
       setEmail("");
       setSuccessMessage(answer.message);
+      setTimeout(() => {
+        history.push("/");
+      }, 1);
     } else {
       setErrorMessage(answer.message);
       setIsError(true);
@@ -177,11 +180,7 @@ const SignUp = ({ socket}) => {
         isError={isError}
         errorMessage={errorMessage}
       />
-      <Success
-        isSuccess={isSuccess}
-        setIsSuccess={setIsSuccess}
-        successMessage={successMessage}
-      />
+
     </>
   );
 };

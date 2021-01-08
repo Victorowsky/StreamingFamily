@@ -37,10 +37,12 @@
   border-radius: 0 3px 3px 0;
 }
 .rightPanel div {
+  display: flex;
   width: 100%;
   padding: 15px 0px;
   display: block;
   padding: 15px 20px;
+  align-items: center;
 }
 
 .rightPanel div:nth-child(2n) {
