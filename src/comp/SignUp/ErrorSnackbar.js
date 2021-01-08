@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useContext } from "react";
 import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
 import { makeStyles } from "@material-ui/core/styles";
+import {DataContext} from '../../App'
 
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -16,7 +17,9 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function CustomizedSnackbars({setIsError, isError, errorMessage}) {
+export default function CustomizedSnackbars() {
+  const {setIsError, isError, errorMessage} = useContext(DataContext)
+
   const classes = useStyles();
   // const [open, setOpen] = React.useState(true);
 
@@ -36,7 +39,7 @@ export default function CustomizedSnackbars({setIsError, isError, errorMessage})
 
   return (
     <div className={classes.root}>
-      <Snackbar open={isError} autoHideDuration={6000} onClose={handleClose}>
+      <Snackbar open={isError} autoHideDuration={4000} onClose={handleClose}>
         <Alert onClose={()=>setIsError(false)} severity="error">
           {errorMessage}
         </Alert>

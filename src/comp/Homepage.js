@@ -3,8 +3,14 @@ import Title from "./Title";
 import { Link } from "react-router-dom";
 import Button from "./SignUp/Button";
 import Cookies from "js-cookie";
+import {DataContext} from '../App';
+import { useContext } from "react";
 
-const Homepage = ( {nickname, setNickname, setUserID, setUserData }) => {
+
+const Homepage = () => {
+const {nickname, setUserID, setUserData, setNickname} = useContext(DataContext)
+
+
   const handleLogOut = () => {
     setNickname(null);
     setUserID(null);

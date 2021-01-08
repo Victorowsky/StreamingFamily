@@ -16,11 +16,12 @@
   color: black;
   border-radius: 5px;
   flex-wrap: wrap;
+  box-shadow: 2px 0px 20px black;
 }
 .leftPanel {
-  /* flex: 0.3; */
   display: flex;
   flex-direction: column;
+  border-right: 2px solid black;
 }
 .leftPanelItem {
   padding: 15px 20px;
@@ -48,3 +49,20 @@
 .rightPanel div:nth-child(2n) {
   background-color: #302f2f;
 }
+
+@media (max-width: 620px) {
+  /* .account {
+    width: 367px;
+  }
+  .leftPanel {
+    width: 100%;
+  } */
+  .leftPanel {
+    width: 100%;
+    border-bottom: 2px solid black;
+    border-right: 0px solid black;
+  }
+  .rightPanel {
+    width: 100%;
+  }
+} ;

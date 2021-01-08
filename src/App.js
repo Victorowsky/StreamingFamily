@@ -5,9 +5,10 @@ import Homepage from "./comp/Homepage";
 import { Switch, Route } from "react-router-dom";
 import Netflix from "./comp/Netflix";
 import Spotify from "./comp/Spotify";
+import Error from "./comp/SignUp/ErrorSnackbar"
 // import HBOGO from "./comp/HBOGO";
 // import Disney from "./comp/Disney";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import SignUp from "./comp/SignUp/SignUp";
 import Login from "./comp/Login/Login";
 import Account from './comp/Account/Account';
@@ -16,23 +17,18 @@ import Success from './comp/SignUp/SuccessSnackbar';
 
 const socket = io("http://localhost:3001/");
 
+export const DataContext = React.createContext()
+
+
 function App() {
   const [userID, setUserID] = useState();
   const [nickname, setNickname] = useState();
   const [userData, setUserData] = useState();
-  const [refreshData, setRefreshData] = useState(1)
   const [isSuccess, setIsSuccess] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
+  const [isError, setIsError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("Try again!");
 
-
-  const handleCookies = () => {
-    if (Cookies.get("userID")) {
-      setUserID(Cookies.get("userID"));
-      setTimeout(() => {
-        socket.emit("CheckUserID", userID);
-      }, 1);
-    }
-  };
 
   socket.on("CheckUserIDAnswer", (data) => {
     setUserData(data)
@@ -40,53 +36,38 @@ function App() {
   });
 
 
-
-
   useEffect(() => {
-    handleCookies();
-  },[userID, refreshData]);
+      if (Cookies.get("userID")) {
+        setUserID(Cookies.get("userID"));
+        setTimeout(() => {
+          socket.emit("CheckUserID", userID);
+        }, 1);
+      } 
+  },[userID]);
 
 
 
   return (
     <>
-    
+    <DataContext.Provider 
+    value={{userID, setUserID,nickname, setNickname, userData, setUserData, socket, isSuccess, setIsSuccess, successMessage, setSuccessMessage, isError, setIsError, errorMessage,setErrorMessage}}>
+
     <div className="app">
     <Switch>
       <Route path="/" exact>
-        <Homepage
-          userID={userID}
-          nickname={nickname}
-          setUserID={setUserID}
-          setNickname={setNickname}
-          setUserData={setUserData}
-        />
+        <Homepage/>
       </Route>
       <Route path="/signup" exact>
-        <SignUp 
-          socket={socket} 
-          userID={userID}           
-          isSuccess={isSuccess}
-          setIsSuccess={setIsSuccess}
-          successMessage={successMessage}
-          setSuccessMessage={setSuccessMessage} />
+        <SignUp />
       </Route>
       <Route path="/login">
-        <Login
-          socket={socket}
-          setUserID={setUserID}
-          setNickname={setNickname}
-          isSuccess={isSuccess}
-          setIsSuccess={setIsSuccess}
-          successMessage={successMessage}
-          setSuccessMessage={setSuccessMessage}
-        />
+        <Login/>
         </Route>
         <Route path="/account">
         {userData && <Account nickname={nickname} userData={userData}/>}  
         </Route>
       <Route path="/activate">
-        <ConfirmAccount setRefreshData={setRefreshData} socket={socket} userID={userID}/>
+        <ConfirmAccount />
       </Route>
       <Route path="/netflix" component={Netflix} />
       <Route path="/Spotify" component={Spotify} />
@@ -94,8 +75,12 @@ function App() {
       {/* <Route path="/Disney+" component={Disney} /> */}
     </Switch>
   </div>
+      <Success/>
+      <Error
+      />
 
-      <Success isSuccess={isSuccess} setIsSuccess={setIsSuccess} successMessage={'Logged in!'}/>
+    </DataContext.Provider>
+
     </>
   );
 }

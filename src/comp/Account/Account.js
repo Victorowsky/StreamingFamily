@@ -1,12 +1,12 @@
 import "./Account.css"
 import {Link} from 'react-router-dom';
 import Button from '../SignUp/Button';
+import {DataContext} from '../../App';
+import { useContext } from "react";
 
-const Profile = ({nickname, userData}) => {
-
-  console.log(userData);
+const Profile = () => {
+  const {userData} = useContext(DataContext)
   const {name, username, email, accountCreated, isVerified} = userData;
-
 
     return ( 
         <>

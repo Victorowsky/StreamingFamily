@@ -1,22 +1,24 @@
 import "./SignUp.css";
 import { useState, useEffect } from "react";
 import Button2 from "@material-ui/core/Button";
-import Error from "./ErrorSnackbar";
 import { Link  } from "react-router-dom";
 import Checkbox from "./Checkbox";
 import anime from "animejs/lib/anime.es.js";
 import Button from "./Button";
 import { useHistory } from "react-router-dom";
+import {DataContext} from '../../App';
+import { useContext } from "react";
+import Cookies from 'js-cookie';
 
 
 
-const SignUp = ({ socket, setIsSuccess, setSuccessMessage}) => {
+const SignUp = () => {
+  const {socket, setIsSuccess, setSuccessMessage, setUserID, setIsError,  setErrorMessage} = useContext(DataContext)
+
   const [name, setName] = useState();
   const [username, setUsername] = useState();
   const [password, setPassword] = useState();
   const [email, setEmail] = useState();
-  const [errorMessage, setErrorMessage] = useState("Try again!");
-  const [isError, setIsError] = useState(false);
   const [checked, setChecked] = useState(false);
   const history = useHistory();
 
@@ -78,6 +80,8 @@ const SignUp = ({ socket, setIsSuccess, setSuccessMessage}) => {
       setPassword("");
       setEmail("");
       setSuccessMessage(answer.message);
+      Cookies.set('userID', answer.userID, {expires: 3})
+      setUserID(answer.userID)
       setTimeout(() => {
         history.push("/");
       }, 1);
@@ -174,12 +178,7 @@ const SignUp = ({ socket, setIsSuccess, setSuccessMessage}) => {
           </div>
         </div>
       
-  
-      <Error
-        setIsError={setIsError}
-        isError={isError}
-        errorMessage={errorMessage}
-      />
+
 
     </>
   );

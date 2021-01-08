@@ -5,6 +5,7 @@
   color: white;
   margin: 5px;
   transition: 0.5s;
+  box-shadow: 2px 0px 20px black;
 }
 .partiesContainer {
   color: white;

@@ -1,30 +1,34 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import Button from '../SignUp/Button';
-import Success from './SuccessSnackbar';
 import {Redirect} from 'react-router-dom';
+import {DataContext} from '../../App';
 
 
 
-const ConfirmAccount = ({socket, userID,setRefreshData}) => {
+const ConfirmAccount = () => {
+
+    const {socket, userID, setIsSuccess} = useContext(DataContext)
 
 
     const [ValidateToken, setValidateToken] = useState('')
-    const [isSuccess, setIsSuccess] = useState(false)
     const [redirect, setRedirect] = useState(false)
 
 
     const handleSendCode= (e) =>{
         e.preventDefault()
-    if(ValidateToken){
+        if(ValidateToken){
         socket.emit('sendValidationCode', {userID, ValidateToken})
     }}
 
     socket.on('sendValidationCodeAnswer', ({message, success})=>{
+        if(success){
         setIsSuccess(success)
-        setRefreshData(prev=> prev+1)
         setTimeout(() => {
             setRedirect(success)
         }, 1500);
+        }else{
+            console.log(success);
+        }
     })
 
 
@@ -42,7 +46,6 @@ const ConfirmAccount = ({socket, userID,setRefreshData}) => {
             <Button text={'Confirm'} onClick={handleSendCode}/>
 
         </div>
-        <Success isSuccess={isSuccess} setIsSuccess={setIsSuccess} successMessage={'Account activated!'}/>
         </>
      );
 }

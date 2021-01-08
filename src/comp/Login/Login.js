@@ -7,8 +7,12 @@ import { Link, useHistory } from "react-router-dom";
 import anime from "animejs/lib/anime.es.js";
 import Button from "../SignUp/Button";
 import Cookies from "js-cookie";
+import {DataContext} from '../../App';
+import { useContext } from "react";
 
-const Login = ({ socket, setUserID, setNickname,setIsSuccess,setSuccessMessage }) => {
+const Login = () => {
+const {socket, setUserID, setNickname,setIsSuccess,setSuccessMessage} = useContext(DataContext)
+
   const [username, setUsername] = useState();
   const [password, setPassword] = useState();
   const [errorMessage, setErrorMessage] = useState("");
