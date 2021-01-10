@@ -11,6 +11,7 @@ const Title = () => {
         setAnimatedText((prev) => (prev += element));
       }, 100 * index);
     });
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

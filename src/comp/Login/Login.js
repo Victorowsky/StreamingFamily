@@ -1,8 +1,6 @@
 // import "./SignUp.css";
 import { useEffect, useState } from "react";
 import Button2 from "@material-ui/core/Button";
-import Error from "../SignUp/ErrorSnackbar";
-// import Success from "../SignUp/SuccessSnackbar";
 import { Link, useHistory } from "react-router-dom";
 import anime from "animejs/lib/anime.es.js";
 import Button from "../SignUp/Button";
@@ -11,12 +9,10 @@ import {DataContext} from '../../App';
 import { useContext } from "react";
 
 const Login = () => {
-const {socket, setUserID, setNickname,setIsSuccess,setSuccessMessage} = useContext(DataContext)
+const {socket, setUserID, setNickname,setIsSuccess,setSuccessMessage, setIsError, setErrorMessage} = useContext(DataContext)
 
   const [username, setUsername] = useState();
   const [password, setPassword] = useState();
-  const [errorMessage, setErrorMessage] = useState("");
-  const [isError, setIsError] = useState(false);
   const history = useHistory();
   const [isHover, setIsHover] = useState(false);
 
@@ -134,16 +130,6 @@ const {socket, setUserID, setNickname,setIsSuccess,setSuccessMessage} = useConte
           </div>
         </div>
       </div>
-      <Error
-        setIsError={setIsError}
-        isError={isError}
-        errorMessage={errorMessage}
-      />
-      {/* <Success
-        isSuccess={isSuccess}
-        setIsSuccess={setIsSuccess}
-        successMessage={successMessage}
-      /> */}
     </>
   );
 };

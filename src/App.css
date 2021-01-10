@@ -31,6 +31,10 @@ input {
   font-size: 18px;
 }
 
+input:focus {
+  border: 2px solid #4361ee;
+}
+
 .homepage {
   display: flex;
   flex-direction: column;

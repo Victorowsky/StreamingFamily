@@ -12,10 +12,6 @@ input {
   justify-content: flex-end;
 }
 
-.forms input:focus {
-  border: 2px solid #4361ee;
-}
-
 .signInContainer {
   width: fit-content;
   background-color: white;

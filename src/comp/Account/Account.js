@@ -2,11 +2,22 @@ import "./Account.css"
 import {Link} from 'react-router-dom';
 import Button from '../SignUp/Button';
 import {DataContext} from '../../App';
-import { useContext } from "react";
+import { useContext, useState } from "react";
+import AccountInfo from './AccountInfo';
+import ChangePassword from './ChangePassword';
+import ChangeEmail from './ChangeEmail';
 
 const Profile = () => {
   const {userData} = useContext(DataContext)
-  const {name, username, email, accountCreated, isVerified} = userData;
+  const {name} = userData;
+  const [whichContent, setWhichContent] = useState('Account')
+
+  const handleSetRightPanel = (e)=> {
+    // console.log(e.target);
+    if(e.target.className === "leftPanelItem"){
+      setWhichContent(e.target.textContent)
+    }
+  }
 
     return ( 
         <>
@@ -18,29 +29,17 @@ const Profile = () => {
       <div className="accountContent">
        <h1>Hello, {name}</h1>  
           <div className="account">
-            <div className="leftPanel">
-              <p className="leftPanelItem">Main</p>
+            <div onClick={(e)=>{handleSetRightPanel(e)}} className="leftPanel">
+              <p className="leftPanelItem">Account</p>
               <p className="leftPanelItem">Change Password</p>
               <p className="leftPanelItem">Change Email</p>
               <p className="leftPanelItem">Settings</p>
             </div>
             <div className="rightPanel">
-              <div>Name: {name}</div>
-              <div>Username: {username}</div>
-              <div>Password: ******</div>
-              <div>Email: {email}</div>
-              <div>Account created: {accountCreated}</div> 
-              
-                
-              
-              {isVerified ? 
-              <div style={{color :'#90be6d'}}>Your account is verifed
-              </div> 
-              : 
-              <Link to="/activate">
-                <div style={{color:'#f94144'}}>Your account is not verifed! Check your email!</div>
-              </Link>  
-              }
+            {whichContent === "Account" &&  <AccountInfo/>} 
+            {whichContent === "Change Password" &&  <ChangePassword/>} 
+            {whichContent === "Change Email" &&  <ChangeEmail/>} 
+
             </div>
           </div>
       </div>
