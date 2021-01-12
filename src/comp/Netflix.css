@@ -1,0 +1,12 @@
+.netflixContent {
+  display: flex;
+  justify-content: center;
+  /* align-items: center; */
+  width: 100%;
+  height: fit-content;
+  text-align: center;
+}
+
+.netflixContent h1 {
+  text-align: center;
+}

@@ -36,6 +36,7 @@ function App() {
   });
 
 
+
   useEffect(() => {
       if (Cookies.get("userID")) {
         setUserID(Cookies.get("userID"));
@@ -46,11 +47,26 @@ function App() {
   },[userID]);
 
 
+  const handleCreateParty = (userID, partyName, text, maxUsers, streamingPlatform) =>{
+    if(userID && partyName && text && maxUsers < 6 && streamingPlatform){
+      socket.emit('createParty', {userID, partyName, text, maxUsers,streamingPlatform})
+    }else if(!userID){
+      setIsError(true)
+      setErrorMessage('You need to login!')
+    }else if(maxUsers > 5 ){
+      setIsError(true)
+      setErrorMessage('Party can have max 5 users')
+    }else{
+     setIsError(true)
+     setErrorMessage('Check it one more time')
+    }
+  }
+
 
   return (
     <>
     <DataContext.Provider 
-    value={{userID, setUserID,nickname, setNickname, userData, setUserData, socket, isSuccess, setIsSuccess, successMessage, setSuccessMessage, isError, setIsError, errorMessage,setErrorMessage}}>
+    value={{userID, setUserID,nickname, setNickname, userData, setUserData, socket, isSuccess, setIsSuccess, successMessage, setSuccessMessage, isError, setIsError, errorMessage,setErrorMessage, handleCreateParty}}>
 
     <div className="app">
     <Switch>
@@ -64,7 +80,7 @@ function App() {
         <Login/>
         </Route>
         <Route path="/account">
-        {userData && <Account nickname={nickname} userData={userData}/>}  
+       {userData && <Account/>} 
         </Route>
       <Route path="/activate">
         <ConfirmAccount />

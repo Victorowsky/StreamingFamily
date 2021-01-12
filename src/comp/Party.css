@@ -1,11 +1,14 @@
 .party {
+  display: flex;
+  flex-direction: column;
   border: 2px solid white;
   padding: 15px 20px;
   border-radius: 5px;
   color: white;
   margin: 5px;
   transition: 0.5s;
-  box-shadow: 2px 0px 20px black;
+  box-shadow: 0px 0px 20px black;
+  width: 300px;
 }
 .partiesContainer {
   color: white;
@@ -14,9 +17,10 @@
   flex-wrap: wrap;
 }
 .Parties {
+  max-width: 1000px;
   color: white;
   display: flex;
-  flex-direction: row;
+  flex-direction: row-reverse;
   flex-wrap: wrap;
   justify-content: center;
 }

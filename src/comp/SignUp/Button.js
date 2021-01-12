@@ -13,7 +13,7 @@ const useStyles = makeStyles((theme) => ({
     },
     "& > *:hover": {
       borderColor: "white",
-      boxShadow: "2px 2px 10px white",
+      boxShadow: "0px 0px 10px white",
       backgroundColor: 'white',
       color:'black',
       width:'fit-content'

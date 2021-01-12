@@ -26,6 +26,7 @@ const ChangePassowrd = () => {
       setErrorMessage("Check it one more time");
     }
   };
+
 // REQUEST TO GENERATE CODE TO CHANGE PASSWORD
   const changePasswordCode = () =>{
       socket.emit('changePasswordCode', {userID})
@@ -53,11 +54,15 @@ const ChangePassowrd = () => {
     }
   });
 
+
+  const divStyle = { width: "fit-content", height:'fit-content', alignSelf:'center', padding:'15px 20px',backgroundColor:'transparent' }
+
   return (
     <>
 
 
       <div className="changePassword">
+          <h2>CHANGE PASSWORD</h2>
         {changePasswordClicked ?
         <form>
         <input
@@ -84,7 +89,7 @@ const ChangePassowrd = () => {
           }}
           placeholder="Code from email"
         />
-        <div style={{ width: "fit-content" }}>
+        <div style={{ width: "fit-content"}}>
         <Button
               onClick={handleChangePassword}
               style={{width:'100%'}}
@@ -97,7 +102,7 @@ const ChangePassowrd = () => {
         </div>
       </form>
         :
-        <div style={{ width: "fit-content", height:'fit-content', alignSelf:'center', padding:'15px 20px' }}>
+        <div style={divStyle}>
         <Button text={'Send code to email!'} onClick={changePasswordCode}/> 
  </div>
         }

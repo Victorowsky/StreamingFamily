@@ -12,6 +12,7 @@ const Title = () => {
       }, 100 * index);
     });
 
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

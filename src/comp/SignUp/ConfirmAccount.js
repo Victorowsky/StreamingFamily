@@ -7,7 +7,7 @@ import {DataContext} from '../../App';
 
 const ConfirmAccount = () => {
 
-    const {socket, userID, setIsSuccess} = useContext(DataContext)
+    const {socket, userID, setIsSuccess, setIsError,setErrorMessage, setSuccessMessage} = useContext(DataContext)
 
 
     const [ValidateToken, setValidateToken] = useState('')
@@ -23,11 +23,11 @@ const ConfirmAccount = () => {
     socket.on('sendValidationCodeAnswer', ({message, success})=>{
         if(success){
         setIsSuccess(success)
-        setTimeout(() => {
-            setRedirect(success)
-        }, 1500);
+        setSuccessMessage(message)
+        setRedirect(success)
         }else{
-            console.log(success);
+            setIsError(true)
+            setErrorMessage(message)
         }
     })
 
