@@ -1,4 +1,4 @@
-// import "./SignUp.css";
+import "./Login.css";
 import { useEffect, useState } from "react";
 import Button2 from "@material-ui/core/Button";
 import { Link, useHistory } from "react-router-dom";
@@ -7,14 +7,17 @@ import Button from "../SignUp/Button";
 import Cookies from "js-cookie";
 import {DataContext} from '../../App';
 import { useContext } from "react";
+import Loading from '../Loadings/Loading';
 
 const Login = () => {
 const {socket, setUserID, setNickname,setIsSuccess,setSuccessMessage, setIsError, setErrorMessage} = useContext(DataContext)
 
-  const [username, setUsername] = useState();
-  const [password, setPassword] = useState();
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
   const history = useHistory();
   const [isHover, setIsHover] = useState(false);
+  const [isLoading, setIsLoading] = useState(false)
+
 
   const buttonStyleCreateAccount = {
     marginTop: "5px",
@@ -50,6 +53,7 @@ const {socket, setUserID, setNickname,setIsSuccess,setSuccessMessage, setIsError
         username,
         password,
       });
+      setIsLoading(true)
     } else {
       setErrorMessage("Check your details again");
       setIsError(true);
@@ -68,9 +72,11 @@ const {socket, setUserID, setNickname,setIsSuccess,setSuccessMessage, setIsError
       setTimeout(() => {
         history.push("/");
       }, 1);
+      setIsLoading(false)
     } else {
       setErrorMessage(answer.message);
       setIsError(true);
+      setIsLoading(false)
     }
   });
 
@@ -81,11 +87,11 @@ const {socket, setUserID, setNickname,setIsSuccess,setSuccessMessage, setIsError
           <Button variant="outlined" text={"Back"} />
         </Link>
       </div>
-      <div className="content">
+      <div className="loginContent">
         <div style={{ display: "flex", flexDirection: "column" }}>
-          <div className="signInContainer">
+          <div className="loginContainer">
             <h1>Log in to your account</h1>
-            <div className="signUp">
+            <div className="login">
               <form autoComplete="off" className="forms">
                 <input
                   type="text"
@@ -129,6 +135,10 @@ const {socket, setUserID, setNickname,setIsSuccess,setSuccessMessage, setIsError
             </div>
           </div>
         </div>
+        <div className="loadingContainer">
+                {isLoading &&  <Loading/>}
+        </div>
+
       </div>
     </>
   );

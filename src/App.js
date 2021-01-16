@@ -3,8 +3,6 @@ import io from "socket.io-client";
 import Cookies from "js-cookie";
 import Homepage from "./comp/Homepage";
 import { Switch, Route } from "react-router-dom";
-import Netflix from "./comp/Netflix";
-import Spotify from "./comp/Spotify";
 import Error from "./comp/SignUp/ErrorSnackbar"
 // import HBOGO from "./comp/HBOGO";
 // import Disney from "./comp/Disney";
@@ -12,8 +10,10 @@ import React, { useEffect, useState } from "react";
 import SignUp from "./comp/SignUp/SignUp";
 import Login from "./comp/Login/Login";
 import Account from './comp/Account/Account';
+import MyParties from './comp/MyParties';
 import ConfirmAccount from './comp/SignUp/ConfirmAccount';
 import Success from './comp/SignUp/SuccessSnackbar';
+import StreamingPlatformComp from "./comp/StreamingPlatformComp";
 
 const socket = io("http://localhost:3001/");
 
@@ -45,6 +45,11 @@ function App() {
         }, 1);
       } 
   },[userID]);
+
+
+
+
+
 
 
   const handleCreateParty = (userID, partyName, text, maxUsers, streamingPlatform) =>{
@@ -85,10 +90,22 @@ function App() {
       <Route path="/activate">
         <ConfirmAccount />
       </Route>
-      <Route path="/netflix" component={Netflix} />
-      <Route path="/Spotify" component={Spotify} />
-      {/* <Route path="/HBO GO" component={HBOGO} /> */}
-      {/* <Route path="/Disney+" component={Disney} /> */}
+      <Route path="/myparties">
+       {userData && <MyParties/>}
+      </Route>
+      <Route path='/Netflix'>
+          <StreamingPlatformComp color="#e50914" streamingPlatform="Netflix"/>
+      </Route>
+      <Route path='/Spotify'>
+          <StreamingPlatformComp color="#1DB954" streamingPlatform="Spotify"/>
+      </Route>
+      <Route path='/HBOGO'>
+          <StreamingPlatformComp color="white" streamingPlatform="HBOGO"/>
+      </Route>
+      <Route path='/Disney+'>
+          <StreamingPlatformComp color="#113CCF" streamingPlatform="Disney+"/>
+      </Route>
+
     </Switch>
   </div>
       <Success/>

@@ -1,4 +1,4 @@
-.netflixContent {
+.streamingContent {
   display: flex;
   justify-content: center;
   /* align-items: center; */
@@ -7,6 +7,6 @@
   text-align: center;
 }
 
-.netflixContent h1 {
+.streamingContent h1 {
   text-align: center;
 }

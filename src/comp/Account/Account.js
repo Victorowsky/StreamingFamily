@@ -33,7 +33,6 @@ const Profile = () => {
               <p className="leftPanelItem">Account</p>
               <p className="leftPanelItem">Change Password</p>
               <p className="leftPanelItem">Change Email</p>
-              <p className="leftPanelItem">Settings</p>
             </div>
             <div className="rightPanel">
             {whichContent === "Account" &&  <AccountInfo/>} 

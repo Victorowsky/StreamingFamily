@@ -15,10 +15,10 @@ import Cookies from 'js-cookie';
 const SignUp = () => {
   const {socket, setIsSuccess, setSuccessMessage, setUserID, setIsError,  setErrorMessage} = useContext(DataContext)
 
-  const [name, setName] = useState();
-  const [username, setUsername] = useState();
-  const [password, setPassword] = useState();
-  const [email, setEmail] = useState();
+  const [name, setName] = useState('');
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('');
   const [checked, setChecked] = useState(false);
   const history = useHistory();
 

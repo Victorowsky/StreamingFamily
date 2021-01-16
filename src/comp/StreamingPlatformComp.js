@@ -4,16 +4,12 @@ import Button from "./SignUp/Button";
 import { DataContext } from "../App";
 import { useContext, useEffect, useRef, useState } from "react";
 import Progress from "./Progress";
-import "./Netflix.css";
+import "./StreamingPlatformComp.css";
 
-const Netflix = () => {
-  const color = "#e50914";
-
-  const streamingPlatform = "Netflix";
+const StreamingPlatformComp = ({color, streamingPlatform}) => {
   const [isCreatePartyContainer, setIsCreatePartyContainer] = useState(false);
-  const [partyName, setPartyName] = useState();
-  const [text, setText] = useState();
-  const [maxUsers, setMaxUsers] = useState();
+  const [text, setText] = useState('');
+  const [maxUsers, setMaxUsers] = useState('');
   const [partiesData, setPartiesData] = useState([]);
 
   const {
@@ -24,7 +20,10 @@ const Netflix = () => {
     setIsError,
     setSuccessMessage,
     setErrorMessage,
+    nickname,
   } = useContext(DataContext);
+  const [partyName, setPartyName] = useState(`${nickname}'s party`);
+
 
   const createPartyContainer = useRef();
 
@@ -38,6 +37,10 @@ const Netflix = () => {
 
   useEffect(() => {
     socket.emit("getPartiesData", streamingPlatform);
+
+    return ()=>{
+      setPartiesData([])
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -45,30 +48,35 @@ const Netflix = () => {
     setPartiesData(docs);
   });
   // WHEN SOMEONE WILL ADD NEW PARTY
-  socket.on("newPartyAdded", ({ addedParty }) => {
+  socket.on("newPartyAddedAnswer", ({ addedParty }) => {
     if (addedParty.streamingPlatform === streamingPlatform) {
       setPartiesData([...partiesData, addedParty]);
     }
   });
 
-  socket.on("joinPartyAnswer", ({ message, success, partyChanged }) => {
+  socket.on("joinPartyAnswer", ({ message, success }) => {
+    
     if (success) {
       setIsSuccess(true);
       setSuccessMessage(message);
-      let deletedIndex;
-      const oldPartiesData = partiesData.filter((party, index)=>{
-        if(party._id === partyChanged._id){
-          deletedIndex = index
-        }
-       return party._id !== partyChanged._id
-      });
-      oldPartiesData.splice(deletedIndex, 0, partyChanged)
-      setPartiesData(oldPartiesData)
     } else {
       setIsError(true);
       setErrorMessage(message);
     }
   });
+
+  socket.on('updateParty', ({partyChanged})=>{
+    let deletedIndex;
+    const oldPartiesData = partiesData.filter((party, index)=>{
+      if(party._id === partyChanged._id){
+        deletedIndex = index
+      }
+     return party._id !== partyChanged._id
+    });
+    oldPartiesData.splice(deletedIndex, 0, partyChanged)
+    setPartiesData(oldPartiesData)
+  })
+
 
   socket.on("createPartyAnswer", ({ message, success }) => {
     if (success) {
@@ -89,6 +97,7 @@ const Netflix = () => {
       key={party._id}
       partyID={party._id}
       name={party.partyName}
+      text={party.textContent}
       users={party.users}
       maxUsers={party.maxUsers}
       creator={party.creatorUsername}
@@ -105,9 +114,9 @@ const Netflix = () => {
             <Button variant="outlined" text={"Back"} />
           </Link>
         </div>
-        <div className="netflixContent">
+        <div className="streamingContent">
           <div className="partiesContainer">
-            <h1>Netflix Families</h1>
+            <h1>{streamingPlatform} Families</h1>
             <Button
               text={"Create own party"}
               onClick={() => {
@@ -140,14 +149,17 @@ const Netflix = () => {
               <input
                 type="number"
                 style={{ width: "263px" }}
-                max={4}
+                max={5}
                 min={1}
                 placeholder="How many friends"
                 onChange={(e) => setMaxUsers(e.target.value)}
                 value={maxUsers}
                 // style={{width:"100%"}}
               />
-              {/* <button onClick={(e)=> handleCreateParty(userID, partyName, text, maxUsers,e)} style={{display:'none'}} type="submit"></button> */}
+              <button onClick={(e)=>{
+                e.preventDefault()
+                handleCreateParty(userID, partyName, text, maxUsers,streamingPlatform)
+              }} style={{display:'none'}} type="submit"></button>
               <Button
                 text="Create"
                 onClick={() =>
@@ -168,4 +180,4 @@ const Netflix = () => {
   );
 };
 
-export default Netflix;
+export default StreamingPlatformComp;

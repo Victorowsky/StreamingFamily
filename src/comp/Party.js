@@ -8,9 +8,11 @@ import "./Party.css";
 
 
 
-const Party = ({ name, users, maxUsers, color,dateCreated,creator,partyID }) => {
+const Party = ({ name, users, maxUsers, color,dateCreated,creator,partyID, text }) => {
   const [isHovered, setIsHovered] = useState();
-const {userID, socket} = useContext(DataContext)
+const {userID, socket, setIsError, setErrorMessage} = useContext(DataContext)
+
+
 
 
   const hoverStyle = {
@@ -25,7 +27,13 @@ const {userID, socket} = useContext(DataContext)
 
   const joinParty = () =>{
    const partyID = joinButton.current.dataset.id
-    socket.emit('joinParty', {userID, partyID})
+   if(userID && partyID){
+         socket.emit('joinParty', {userID, partyID})
+   }else{
+    setIsError(true)
+    setErrorMessage('Please login!')
+   }
+
   }
 
 
@@ -55,8 +63,9 @@ const {userID, socket} = useContext(DataContext)
       </div>
 
       <h2>
-        Users: {users.length}/{maxUsers}
+      {text}
       </h2>
+      <span>Users: {users.length}/{maxUsers}</span>
       <span>Created: {dateCreated}</span>
       <span>Created by: {creator}</span>
     </div>

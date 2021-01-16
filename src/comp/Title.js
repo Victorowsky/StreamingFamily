@@ -5,14 +5,22 @@ const Title = () => {
   const [animatedText, setAnimatedText] = useState("");
   text = Array.from(text);
   useEffect(() => {
+    const timeouts =[]
+
     setAnimatedText("");
     text.forEach((element, index) => {
-      setTimeout(() => {
+     const timeoutIndex =  setTimeout(() => {
         setAnimatedText((prev) => (prev += element));
       }, 100 * index);
+      timeouts.push(timeoutIndex)
     });
 
 
+    return ()=>{
+      timeouts.forEach((timeout)=>{
+        clearTimeout(timeout)
+      })
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
