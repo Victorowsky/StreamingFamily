@@ -9,6 +9,7 @@ import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import AccountBoxIcon from '@material-ui/icons/AccountBox';
 import LibraryBooksIcon from '@material-ui/icons/LibraryBooks';
 import { IconButton } from '@material-ui/core';
+import BottomNavigation from './BottomNavigation'
 
 
 const Homepage = () => {
@@ -44,6 +45,7 @@ const {nickname, setUserID, setUserData, setNickname, socket, userID} = useConte
   return (
     <>
   {phoneVersion ?  // PHONE VERSION
+  <>
   <div className="header">
   {!nickname ? (
     <Link to="/login">
@@ -75,7 +77,10 @@ const {nickname, setUserID, setUserData, setNickname, socket, userID} = useConte
           <ExitToAppIcon style={{color:'white'}} onClick={handleLogOut}/>
     </IconButton>
   )}
+
 </div> 
+      {/* <BottomNavigation/> */}
+</>
 : 
 //          DESKTOP VERSION
   

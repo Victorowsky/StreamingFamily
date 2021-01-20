@@ -1,0 +1,36 @@
+.myParties {
+  /* max-width: 1300px; */
+  flex-direction: row;
+  color: white;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  box-sizing: border-box;
+  align-items: baseline;
+}
+.myPartiesContent {
+  display: flex;
+  justify-content: center;
+  color: white;
+  flex-direction: column;
+  width: 100%;
+  height: fit-content;
+  text-align: center;
+}
+.MyPartiesColumn {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  width: fit-content;
+  margin: 0 10px;
+}
+
+.myPartiesLoading {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}

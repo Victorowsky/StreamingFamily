@@ -94,6 +94,7 @@ const StreamingPlatformComp = ({color, streamingPlatform}) => {
 
   const list = partiesData.map((party) => (
     <Party
+      join={true}
       key={party._id}
       partyID={party._id}
       name={party.partyName}
@@ -154,7 +155,6 @@ const StreamingPlatformComp = ({color, streamingPlatform}) => {
                 placeholder="How many friends"
                 onChange={(e) => setMaxUsers(e.target.value)}
                 value={maxUsers}
-                // style={{width:"100%"}}
               />
               <button onClick={(e)=>{
                 e.preventDefault()

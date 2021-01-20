@@ -21,14 +21,6 @@ export default function CustomizedSnackbars() {
   const {setIsError, isError, errorMessage} = useContext(DataContext)
 
   const classes = useStyles();
-  // const [open, setOpen] = React.useState(true);
-
-  // const handleClick = () => {
-  //   setIsError(true);
-  // };
-
-
-
   const handleClose = (event, reason) => {
     if (reason === "clickaway") {
       return;

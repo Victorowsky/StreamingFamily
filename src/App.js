@@ -4,18 +4,20 @@ import Cookies from "js-cookie";
 import Homepage from "./comp/Homepage";
 import { Switch, Route } from "react-router-dom";
 import Error from "./comp/SignUp/ErrorSnackbar"
-// import HBOGO from "./comp/HBOGO";
-// import Disney from "./comp/Disney";
 import React, { useEffect, useState } from "react";
 import SignUp from "./comp/SignUp/SignUp";
 import Login from "./comp/Login/Login";
 import Account from './comp/Account/Account';
-import MyParties from './comp/MyParties';
+import MyParties from './comp/MyParties/MyParties';
 import ConfirmAccount from './comp/SignUp/ConfirmAccount';
 import Success from './comp/SignUp/SuccessSnackbar';
 import StreamingPlatformComp from "./comp/StreamingPlatformComp";
+import PartyInfo from './comp/MyParties/PartyInfo';
 
-const socket = io("http://localhost:3001/");
+// const dbURL = 'https://stormy-refuge-26952.herokuapp.com/'
+
+const socket = io('localhost:3001/');
+// const socket = io(dbURL);
 
 export const DataContext = React.createContext()
 
@@ -105,6 +107,8 @@ function App() {
       <Route path='/Disney+'>
           <StreamingPlatformComp color="#113CCF" streamingPlatform="Disney+"/>
       </Route>
+      <Route path='/party/:partyID' component={PartyInfo}/>
+
 
     </Switch>
   </div>

@@ -18,6 +18,7 @@ const SignUp = () => {
   const [name, setName] = useState('');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [checkPassword, setCheckPassword] = useState('')
   const [email, setEmail] = useState('');
   const [checked, setChecked] = useState(false);
   const history = useHistory();
@@ -50,7 +51,7 @@ const SignUp = () => {
   }, []);
 
   const handleSignUp = () => {
-    if (name && username && password && email) {
+    if (name && username && password && email && checkPassword) {
       if (!email.includes("@")) {
         setErrorMessage("Check your email");
         return setIsError(true);
@@ -59,6 +60,9 @@ const SignUp = () => {
         return setIsError(true);
       } else if (password.length < 6) {
         setErrorMessage("Password is to short");
+        return setIsError(true);
+      } else if(password !== checkPassword){
+        setErrorMessage("Passwords are not the same");
         return setIsError(true);
       }
       socket.emit("SignUpData", {
@@ -138,6 +142,14 @@ const SignUp = () => {
                     onChange={(e) => setPassword(e.target.value)}
                     value={password}
                     placeholder="Password"
+                  />
+                   <input
+                    autoComplete="off"
+                    type="password"
+                    name="checkPassword"
+                    onChange={(e) => setCheckPassword(e.target.value)}
+                    value={checkPassword}
+                    placeholder="Repeat password"
                   />
                   <input
                     autoComplete="off"

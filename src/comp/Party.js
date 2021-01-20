@@ -8,7 +8,7 @@ import "./Party.css";
 
 
 
-const Party = ({ name, users, maxUsers, color,dateCreated,creator,partyID, text }) => {
+const Party = ({ name, users, maxUsers, color,dateCreated,creator,partyID, text, join }) => {
   const [isHovered, setIsHovered] = useState();
 const {userID, socket, setIsError, setErrorMessage} = useContext(DataContext)
 
@@ -48,9 +48,10 @@ const {userID, socket, setIsError, setErrorMessage} = useContext(DataContext)
 
       <h1>{name}</h1>
 
-      <div 
-      style={{display:'flex', flexDirection:'column', width:'fit-content', alignSelf:'center'}}
 
+     {/* MADE FOR MYPARTIES WITH OUT + BUTTON */}
+     {join && <div 
+      style={{display:'flex', flexDirection:'column', width:'fit-content', alignSelf:'center'}}
       >
         <IconButton 
         onClick={joinParty}
@@ -60,7 +61,7 @@ const {userID, socket, setIsError, setErrorMessage} = useContext(DataContext)
           <AddIcon style={{ color: "white", fontSize: "50px" }} />
         </IconButton>
         JOIN
-      </div>
+      </div>}
 
       <h2>
       {text}

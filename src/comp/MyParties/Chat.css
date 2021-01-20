@@ -1,0 +1,28 @@
+.chat {
+  width: 100%;
+  color: white;
+  max-height: 300px;
+  overflow: auto;
+  align-self: center;
+  display: flex;
+  flex-direction: column;
+}
+.chat span {
+  font-weight: bold;
+}
+.chat p {
+  padding: 6px 10px;
+  margin: 0;
+  border: 2px solid white;
+  width: fit-content;
+  /* display: flex; */
+  border-radius: 20px;
+  margin: 5px 5px;
+  flex-wrap: wrap;
+  word-wrap: break-word;
+  max-width: 300px;
+}
+
+.chat p:nth-child(2n) {
+  background-color: white;
+}

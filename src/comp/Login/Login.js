@@ -41,7 +41,7 @@ const {socket, setUserID, setNickname,setIsSuccess,setSuccessMessage, setIsError
 
   useEffect(() => {
     anime({
-      targets: ".signInContainer",
+      targets: ".loginContainer",
       scale: [0, 1],
       duration: 2000,
     });

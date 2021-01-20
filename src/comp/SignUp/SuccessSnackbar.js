@@ -21,13 +21,6 @@ const useStyles = makeStyles((theme) => ({
 export default function CustomizedSnackbars() {
   const {isSuccess, setIsSuccess, successMessage} = useContext(DataContext)
   const classes = useStyles();
-  // const [open, setOpen] = React.useState(true);
-
-  // const handleClick = () => {
-  //   setIsSuccess(true);
-  // };
-
-
 
   const handleClose = (event, reason) => {
     if (reason === "clickaway") {

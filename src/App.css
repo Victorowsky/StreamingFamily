@@ -80,6 +80,12 @@ input:focus {
   align-items: center;
   border-spacing: 15px;
 }
+.loading {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
 
 a {
   text-decoration: none;
