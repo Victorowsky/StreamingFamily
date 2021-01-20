@@ -30,13 +30,14 @@
 .partyName {
   border-bottom: 2px dashed white;
   display: flex;
+  flex-direction: row;
   flex-wrap: wrap;
+  justify-content: space-evenly;
   gap: 10px;
 }
 .partyName h1 {
   display: flex;
   margin: 0;
-  justify-content: center;
 }
 .partyName__createdBy {
   align-self: flex-end;
@@ -64,6 +65,14 @@
 }
 .chatContainer input {
   width: 99%;
+}
+.info {
+  /* flex: 1;
+  text-align: start; */
+}
+
+.leaveButton {
+  align-self: center;
 }
 
 @media (max-width: 605px) {

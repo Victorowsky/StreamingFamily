@@ -1,7 +1,7 @@
 import "./PartyInfo.css"
 import {DataContext} from '../../App';
 import {useParams} from "react-router-dom";
-import { useContext,useEffect,useState } from 'react';
+import { useContext,useEffect,useRef,useState } from 'react';
 import Button from '../SignUp/Button'
 import {Link} from 'react-router-dom'
 import Loading from '../Loadings/Loading';
@@ -15,6 +15,7 @@ const PartyInfo = (props) => {
     const {partyID} = useParams()
     const {socket, nickname, setIsError, setErrorMessage, userID,setIsSuccess, setSuccessMessage} = useContext(DataContext)
     const history = useHistory()
+
 
     const [partyData, setPartyData] = useState()
     const [message, setMessage] = useState('')
@@ -65,6 +66,8 @@ const PartyInfo = (props) => {
         }
     })
 
+    
+
 
     let createUsersAvatars;
     if(partyData){
@@ -84,9 +87,17 @@ const PartyInfo = (props) => {
            <div className="partyInfoContainer">
             <div className="partyInfo">
                 <div className="partyName">
-                    <h1>{partyData.partyName}</h1>
-                        <span className="partyName__createdBy">Created by: {partyData.creatorUsername} | {partyData.dateCreated}</span>
-                        <Button onClick={handleLeaveParty} text={'LEAVE PARTY'}/>
+                    <div className="info">
+                            <h1>{partyData.partyName}</h1>
+                            <span className="partyName__createdBy">
+                                Created by: {partyData.creatorUsername} | {partyData.dateCreated}
+                            </span>
+                    </div>
+                    
+                        <div className="leaveButton">
+                            <Button onClick={handleLeaveParty} text={'LEAVE PARTY'}/>
+                        </div>
+                        
                 </div>
 
                 <div className="partyUsers">
