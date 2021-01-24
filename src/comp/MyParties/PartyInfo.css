@@ -71,8 +71,10 @@
   text-align: start; */
 }
 
-.leaveButton {
-  align-self: center;
+.partyInfoButtons {
+  /* align-self: center; */
+  display: flex;
+  flex-direction: row;
 }
 
 @media (max-width: 605px) {

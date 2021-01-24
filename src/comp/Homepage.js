@@ -9,7 +9,6 @@ import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import AccountBoxIcon from '@material-ui/icons/AccountBox';
 import LibraryBooksIcon from '@material-ui/icons/LibraryBooks';
 import { IconButton } from '@material-ui/core';
-import BottomNavigation from './BottomNavigation'
 
 
 const Homepage = () => {
@@ -79,7 +78,6 @@ const {nickname, setUserID, setUserData, setNickname, socket, userID} = useConte
   )}
 
 </div> 
-      {/* <BottomNavigation/> */}
 </>
 : 
 //          DESKTOP VERSION

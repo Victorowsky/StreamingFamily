@@ -1,5 +1,5 @@
 import "./Login.css";
-import { useEffect, useState } from "react";
+import { useEffect, useState,useRef } from "react";
 import Button2 from "@material-ui/core/Button";
 import { Link, useHistory } from "react-router-dom";
 import anime from "animejs/lib/anime.es.js";
@@ -9,8 +9,10 @@ import {DataContext} from '../../App';
 import { useContext } from "react";
 import Loading from '../Loadings/Loading';
 
-const Login = () => {
-const {socket, setUserID, setNickname,setIsSuccess,setSuccessMessage, setIsError, setErrorMessage} = useContext(DataContext)
+const Login = ({turnOffBack}) => {
+const {socket, setUserID, setNickname,setIsSuccess,setSuccessMessage, setIsError, setErrorMessage, setIsLoginPage} = useContext(DataContext)
+
+  const loginContainer = useRef()
 
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -73,23 +75,35 @@ const {socket, setUserID, setNickname,setIsSuccess,setSuccessMessage, setIsError
         history.push("/");
       }, 1);
       setIsLoading(false)
+      setIsLoginPage(false) // TO TURN ON LOGIN UI
     } else {
       setErrorMessage(answer.message);
       setIsError(true);
       setIsLoading(false)
+      setPassword('')
+      // RED BOX SHADOW IF LOGIN DATA ARE WRONG
+      if(loginContainer.current){
+        loginContainer.current.style.transition = '0.3s'
+          loginContainer.current.style.boxShadow = '0px 0px 20px red'
+          setTimeout(() => {
+          loginContainer.current.style.boxShadow = '0px 0px 20px black'
+          }, 1000);
+        }
     }
   });
 
   return (
     <>
-      <div className="header">
-        <Link to="/">
-          <Button variant="outlined" text={"Back"} />
-        </Link>
-      </div>
+     {!turnOffBack && 
+     <div className="header">
+     <Link to="/">
+       <Button variant="outlined" text={"Back"} />
+     </Link>
+   </div>
+     } 
       <div className="loginContent">
         <div style={{ display: "flex", flexDirection: "column" }}>
-          <div className="loginContainer">
+          <div ref={loginContainer} className="loginContainer">
             <h1>Log in to your account</h1>
             <div className="login">
               <form autoComplete="off" className="forms">

@@ -19,7 +19,8 @@
   background-color: white;
   border-radius: 5px;
   padding: 15px 20px;
-  box-shadow: 2px 0px 20px black;
+  box-shadow: 0px 0px 20px black;
+  /* transition: 0.3s; */
 }
 .loadingContainer {
   /* width: 75px; */

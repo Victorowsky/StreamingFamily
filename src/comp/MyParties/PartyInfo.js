@@ -1,13 +1,14 @@
 import "./PartyInfo.css"
 import {DataContext} from '../../App';
 import {useParams} from "react-router-dom";
-import { useContext,useEffect,useRef,useState } from 'react';
+import { useContext,useEffect,useState } from 'react';
 import Button from '../SignUp/Button'
 import {Link} from 'react-router-dom'
 import Loading from '../Loadings/Loading';
-import Avatar from '@material-ui/core/Avatar';
+// import Avatar from '@material-ui/core/Avatar';
 import Chat from './Chat';
 import { useHistory } from "react-router-dom";
+import Dialog from './Dialog';
 
 
 
@@ -69,13 +70,13 @@ const PartyInfo = (props) => {
     
 
 
-    let createUsersAvatars;
-    if(partyData){
-            createUsersAvatars = partyData.users.map((user, index) =>{
-   return(
-       <Avatar key={index} style={{color:'black', border: '1px solid white'}} title={user}>{user[0].toUpperCase()}</Avatar>
-   )})
-    }
+//     let createUsersAvatars;
+//     if(partyData){
+//             createUsersAvatars = partyData.users.map((user, index) =>{
+//    return(
+//        <Avatar key={index} style={{color:'black', border: '1px solid white'}} title={user}>{user[0].toUpperCase()}</Avatar>
+//    )})
+//     }
     return ( 
         <>
         <div className="header">
@@ -94,7 +95,9 @@ const PartyInfo = (props) => {
                             </span>
                     </div>
                     
-                        <div className="leaveButton">
+                        <div className="partyInfoButtons">
+                           {/* <Button text={'USERS'}/> */}
+                           <Dialog users={partyData.users}/>
                             <Button onClick={handleLeaveParty} text={'LEAVE PARTY'}/>
                         </div>
                         

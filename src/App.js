@@ -13,8 +13,9 @@ import ConfirmAccount from "./comp/SignUp/ConfirmAccount";
 import Success from "./comp/SignUp/SuccessSnackbar";
 import StreamingPlatformComp from "./comp/StreamingPlatformComp";
 import PartyInfo from "./comp/MyParties/PartyInfo";
+import LoginPage from './comp/LoginPage';
 
-const dbURL = "https://stormy-refuge-26952.herokuapp.com/";
+// const dbURL = "https://stormy-refuge-26952.herokuapp.com/";
 
 const socket = io("localhost:3001/");
 // const socket = io(dbURL);
@@ -29,6 +30,7 @@ function App() {
   const [successMessage, setSuccessMessage] = useState("");
   const [isError, setIsError] = useState(false);
   const [errorMessage, setErrorMessage] = useState("Try again!");
+  const [isLoginPage, setIsLoginPage] = useState(false)
 
   socket.on("CheckUserIDAnswer", (data) => {
     setUserData(data);
@@ -41,6 +43,8 @@ function App() {
       setTimeout(() => {
         socket.emit("CheckUserID", userID);
       }, 1);
+    }else{
+      setIsLoginPage(true)
     }
   }, [userID]);
 
@@ -91,48 +95,69 @@ function App() {
           errorMessage,
           setErrorMessage,
           handleCreateParty,
+          setIsLoginPage
         }}
       >
-        <div className="app">
-          <Switch>
-            <Route path="/" exact>
-              <Homepage />
-            </Route>
-            <Route path="/signup" exact>
-              <SignUp />
-            </Route>
-            <Route path="/login">
-              <Login />
-            </Route>
-            <Route path="/account">{userData && <Account />}</Route>
-            <Route path="/activate">
-              <ConfirmAccount />
-            </Route>
-            <Route path="/myparties">{userData && <MyParties />}</Route>
-            <Route path="/Netflix">
-              <StreamingPlatformComp
-                color="#e50914"
-                streamingPlatform="Netflix"
-              />
-            </Route>
-            <Route path="/Spotify">
-              <StreamingPlatformComp
-                color="#1DB954"
-                streamingPlatform="Spotify"
-              />
-            </Route>
-            <Route path="/HBOGO">
-              <StreamingPlatformComp color="white" streamingPlatform="HBOGO" />
-            </Route>
-            <Route path="/Disney+">
-              <StreamingPlatformComp
-                color="#113CCF"
-                streamingPlatform="Disney+"
-              />
-            </Route>
-            <Route path="/party/:partyID" component={PartyInfo} />
-          </Switch>
-        </div>
+ <div className="app">
+      {isLoginPage ? // FOR NEW USERS (LOGGED OUT)
+      <>
+     
+        <Route path="/" exact>
+           <LoginPage/>
+      </Route>
+   
+       <Route path="/signup" exact>
+       <SignUp />
+     </Route>
+      
+      
+     </>
+      : 
+      
+      <Switch>
+        <Route path="/" exact>
+          <Homepage />
+        </Route>
+       
+        <Route path="/login">
+          <Login />
+        </Route>
+        <Route path="/LoginPage">
+          <LoginPage/>
+        </Route>
+        <Route path="/account">{userData && <Account />}</Route>
+        <Route path="/activate">
+          <ConfirmAccount />
+        </Route>
+        <Route path="/myparties">{userData && <MyParties />}</Route>
+        <Route path="/Netflix">
+          <StreamingPlatformComp
+            color="#e50914"
+            streamingPlatform="Netflix"
+          />
+        </Route>
+        <Route path="/Spotify">
+          <StreamingPlatformComp
+            color="#1DB954"
+            streamingPlatform="Spotify"
+          />
+        </Route>
+        <Route path="/HBOGO">
+          <StreamingPlatformComp color="white" streamingPlatform="HBOGO" />
+        </Route>
+        <Route path="/Disney+">
+          <StreamingPlatformComp
+            color="#113CCF"
+            streamingPlatform="Disney+"
+          />
+        </Route>
+        <Route path="/party/:partyID" component={PartyInfo} />
+      </Switch>
+  
+      
+      }
+      </div>
+        
         <Success />
         <Error />
       </DataContext.Provider>
