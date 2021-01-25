@@ -1,20 +1,20 @@
 {
   "files": {
     "main.css": "/StreamingFamily/static/css/main.e47cb982.chunk.css",
-    "main.js": "/StreamingFamily/static/js/main.c3b3cef3.chunk.js",
-    "main.js.map": "/StreamingFamily/static/js/main.c3b3cef3.chunk.js.map",
+    "main.js": "/StreamingFamily/static/js/main.fa87b39d.chunk.js",
+    "main.js.map": "/StreamingFamily/static/js/main.fa87b39d.chunk.js.map",
     "runtime-main.js": "/StreamingFamily/static/js/runtime-main.6edeca8d.js",
     "runtime-main.js.map": "/StreamingFamily/static/js/runtime-main.6edeca8d.js.map",
-    "static/js/2.0430e659.chunk.js": "/StreamingFamily/static/js/2.0430e659.chunk.js",
-    "static/js/2.0430e659.chunk.js.map": "/StreamingFamily/static/js/2.0430e659.chunk.js.map",
+    "static/js/2.0d1a620a.chunk.js": "/StreamingFamily/static/js/2.0d1a620a.chunk.js",
+    "static/js/2.0d1a620a.chunk.js.map": "/StreamingFamily/static/js/2.0d1a620a.chunk.js.map",
     "index.html": "/StreamingFamily/index.html",
     "static/css/main.e47cb982.chunk.css.map": "/StreamingFamily/static/css/main.e47cb982.chunk.css.map",
-    "static/js/2.0430e659.chunk.js.LICENSE.txt": "/StreamingFamily/static/js/2.0430e659.chunk.js.LICENSE.txt"
+    "static/js/2.0d1a620a.chunk.js.LICENSE.txt": "/StreamingFamily/static/js/2.0d1a620a.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.6edeca8d.js",
-    "static/js/2.0430e659.chunk.js",
+    "static/js/2.0d1a620a.chunk.js",
     "static/css/main.e47cb982.chunk.css",
-    "static/js/main.c3b3cef3.chunk.js"
+    "static/js/main.fa87b39d.chunk.js"
   ]
 }
