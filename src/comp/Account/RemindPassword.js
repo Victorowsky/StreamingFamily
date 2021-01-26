@@ -96,7 +96,9 @@ const RemindPassword = () => {
               text='Change password'/>
           <button
             style={{ display: "none" }}
-            onClick={(e)=>{handlePasswordChange(e)}}
+            onClick={(e)=>{
+                e.preventDefault()
+                handlePasswordChange(e)}}
             type="submit"
           ></button>
         </div>

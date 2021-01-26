@@ -219,10 +219,10 @@ const MyParties = () => {
        <h1>My Parties</h1>
 
            <div className="myParties">
-           <MyPartiesSchema parties={netflixParties} streamingPlatform={'Netflix'}/>
-           <MyPartiesSchema parties={spotifyParties} streamingPlatform={'Spotify'}/>
-           <MyPartiesSchema parties={hbogoParties} streamingPlatform={'HBO GO'}/>
-           <MyPartiesSchema parties={disneyParties} streamingPlatform={'Disney+'}/>
+           <MyPartiesSchema  parties={netflixParties} streamingPlatform={'Netflix'}/>
+           <MyPartiesSchema  parties={spotifyParties} streamingPlatform={'Spotify'}/>
+           <MyPartiesSchema  parties={hbogoParties} streamingPlatform={'HBO GO'}/>
+           <MyPartiesSchema  parties={disneyParties} streamingPlatform={'Disney+'}/>
            </div>
        </div>
        :
