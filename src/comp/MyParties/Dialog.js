@@ -1,34 +1,26 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { makeStyles } from '@material-ui/core/styles';
-import Button from '../SignUp/Button'
-import Avatar from '@material-ui/core/Avatar';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemAvatar from '@material-ui/core/ListItemAvatar';
-import ListItemText from '@material-ui/core/ListItemText';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import Dialog from '@material-ui/core/Dialog';
-import PersonIcon from '@material-ui/icons/Person';
-import AddIcon from '@material-ui/icons/Add';
-import Typography from '@material-ui/core/Typography';
-import { blue } from '@material-ui/core/colors';
-
+import React from "react";
+import PropTypes from "prop-types";
+import { makeStyles } from "@material-ui/core/styles";
+import Button from "../SignUp/Button";
+import Avatar from "@material-ui/core/Avatar";
+import List from "@material-ui/core/List";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemAvatar from "@material-ui/core/ListItemAvatar";
+import ListItemText from "@material-ui/core/ListItemText";
+import DialogTitle from "@material-ui/core/DialogTitle";
+import Dialog from "@material-ui/core/Dialog";
+import PersonIcon from "@material-ui/icons/Person";
+import { blue } from "@material-ui/core/colors";
 
 let usersCopy;
-const emails = ['username@gmail.com', 'user02@gmail.com'];
+const emails = ["username@gmail.com", "user02@gmail.com"];
 const useStyles = makeStyles({
-    root:{
-        paperScrollPaper:{
-            color:'red'
-        },
-    },
   avatar: {
     backgroundColor: blue[100],
     color: blue[600],
   },
-  
 });
+
 
 function SimpleDialog(props) {
   const classes = useStyles();
@@ -43,7 +35,13 @@ function SimpleDialog(props) {
   };
 
   return (
-    <Dialog className={classes.root} onClose={handleClose} aria-labelledby="simple-dialog-title" open={open}>
+    <Dialog
+      className={classes.root}
+      style={{ color: "red" }}
+      onClose={handleClose}
+      aria-labelledby="simple-dialog-title"
+      open={open}
+    >
       <DialogTitle id="simple-dialog-title">Users in the party</DialogTitle>
       <List>
         {usersCopy.map((user) => (
@@ -56,15 +54,6 @@ function SimpleDialog(props) {
             <ListItemText primary={user} />
           </ListItem>
         ))}
-
-        <ListItem autoFocus button onClick={() => handleListItemClick('addAccount')}>
-          <ListItemAvatar>
-            <Avatar>
-              <AddIcon />
-            </Avatar>
-          </ListItemAvatar>
-          <ListItemText primary="Add account" />
-        </ListItem>
       </List>
     </Dialog>
   );
@@ -76,11 +65,11 @@ SimpleDialog.propTypes = {
   selectedValue: PropTypes.string.isRequired,
 };
 
-export default function SimpleDialogDemo({users}) {
+export default function SimpleDialogDemo({ users }) {
   const [open, setOpen] = React.useState(false);
   const [selectedValue, setSelectedValue] = React.useState(emails[1]);
 
-  usersCopy = users
+  usersCopy = users;
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -93,10 +82,17 @@ export default function SimpleDialogDemo({users}) {
   return (
     <div>
       {/* <Typography variant="subtitle1">Selected: {selectedValue}</Typography> */}
-      <Button text='USERS' variant="outlined" color="primary" onClick={handleClickOpen}>
-    
-      </Button>
-      <SimpleDialog selectedValue={selectedValue} open={open} onClose={handleClose} />
+      <Button
+        text="USERS"
+        variant="outlined"
+        color="primary"
+        onClick={handleClickOpen}
+      ></Button>
+      <SimpleDialog
+        selectedValue={selectedValue}
+        open={open}
+        onClose={handleClose}
+      />
     </div>
   );
 }

@@ -26,7 +26,7 @@ export default function OutlinedButtons({ text, onClick, style  }) {
 
   return (
     <div className={classes.root}>
-      <Button style={{}} variant="outlined" onClick={onClick}>
+      <Button style={style? style:{}} variant="outlined" onClick={onClick}>
         {text}
       </Button>
     </div>

@@ -14,6 +14,7 @@ import Success from "./comp/SignUp/SuccessSnackbar";
 import StreamingPlatformComp from "./comp/StreamingPlatformComp";
 import PartyInfo from "./comp/MyParties/PartyInfo";
 import LoginPage from './comp/LoginPage';
+import RemindPassword from "./comp/Account/RemindPassword";
 
 // const dbURL = "https://stormy-refuge-26952.herokuapp.com/";
 
@@ -109,7 +110,9 @@ function App() {
        <Route path="/signup" exact>
        <SignUp />
      </Route>
-      
+     <Route path="/remindpassword/:code">
+          <RemindPassword/>
+        </Route>
       
      </>
       : 
@@ -129,6 +132,7 @@ function App() {
         <Route path="/activate">
           <ConfirmAccount />
         </Route>
+ 
         <Route path="/myparties">{userData && <MyParties />}</Route>
         <Route path="/Netflix">
           <StreamingPlatformComp
