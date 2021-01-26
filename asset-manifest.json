@@ -1,20 +1,20 @@
 {
   "files": {
-    "main.css": "/StreamingFamily/static/css/main.e47cb982.chunk.css",
-    "main.js": "/StreamingFamily/static/js/main.5464d549.chunk.js",
-    "main.js.map": "/StreamingFamily/static/js/main.5464d549.chunk.js.map",
+    "main.css": "/StreamingFamily/static/css/main.08b023f9.chunk.css",
+    "main.js": "/StreamingFamily/static/js/main.4987535d.chunk.js",
+    "main.js.map": "/StreamingFamily/static/js/main.4987535d.chunk.js.map",
     "runtime-main.js": "/StreamingFamily/static/js/runtime-main.6edeca8d.js",
     "runtime-main.js.map": "/StreamingFamily/static/js/runtime-main.6edeca8d.js.map",
-    "static/js/2.0d1a620a.chunk.js": "/StreamingFamily/static/js/2.0d1a620a.chunk.js",
-    "static/js/2.0d1a620a.chunk.js.map": "/StreamingFamily/static/js/2.0d1a620a.chunk.js.map",
+    "static/js/2.f932b5c1.chunk.js": "/StreamingFamily/static/js/2.f932b5c1.chunk.js",
+    "static/js/2.f932b5c1.chunk.js.map": "/StreamingFamily/static/js/2.f932b5c1.chunk.js.map",
     "index.html": "/StreamingFamily/index.html",
-    "static/css/main.e47cb982.chunk.css.map": "/StreamingFamily/static/css/main.e47cb982.chunk.css.map",
-    "static/js/2.0d1a620a.chunk.js.LICENSE.txt": "/StreamingFamily/static/js/2.0d1a620a.chunk.js.LICENSE.txt"
+    "static/css/main.08b023f9.chunk.css.map": "/StreamingFamily/static/css/main.08b023f9.chunk.css.map",
+    "static/js/2.f932b5c1.chunk.js.LICENSE.txt": "/StreamingFamily/static/js/2.f932b5c1.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.6edeca8d.js",
-    "static/js/2.0d1a620a.chunk.js",
-    "static/css/main.e47cb982.chunk.css",
-    "static/js/main.5464d549.chunk.js"
+    "static/js/2.f932b5c1.chunk.js",
+    "static/css/main.08b023f9.chunk.css",
+    "static/js/main.4987535d.chunk.js"
   ]
 }
