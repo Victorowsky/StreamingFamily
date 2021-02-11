@@ -12,7 +12,9 @@ import Dialog from "@material-ui/core/Dialog";
 import PersonIcon from "@material-ui/icons/Person";
 import { blue } from "@material-ui/core/colors";
 
+
 let usersCopy;
+let adminCopy;
 const emails = ["username@gmail.com", "user02@gmail.com"];
 const useStyles = makeStyles({
   avatar: {
@@ -23,6 +25,7 @@ const useStyles = makeStyles({
 
 
 function SimpleDialog(props) {
+
   const classes = useStyles();
   const { onClose, selectedValue, open } = props;
 
@@ -51,7 +54,7 @@ function SimpleDialog(props) {
                 <PersonIcon />
               </Avatar>
             </ListItemAvatar>
-            <ListItemText primary={user} />
+           <ListItemText primary={user} /> 
           </ListItem>
         ))}
       </List>
@@ -65,11 +68,12 @@ SimpleDialog.propTypes = {
   selectedValue: PropTypes.string.isRequired,
 };
 
-export default function SimpleDialogDemo({ users }) {
+export default function SimpleDialogDemo({ users, admin }) {
   const [open, setOpen] = React.useState(false);
   const [selectedValue, setSelectedValue] = React.useState(emails[1]);
 
   usersCopy = users;
+  adminCopy = admin;
   const handleClickOpen = () => {
     setOpen(true);
   };

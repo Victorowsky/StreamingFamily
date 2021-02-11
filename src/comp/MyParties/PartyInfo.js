@@ -98,7 +98,7 @@ const PartyInfo = (props) => {
 
               <div className="partyInfoButtons">
                 {/* <Button text={'USERS'}/> */}
-                <Dialog users={partyData.users} />
+                <Dialog users={partyData.users} admin={partyData.admin} />
                 <Button onClick={handleLeaveParty} text={"LEAVE PARTY"} />
               </div>
             </div>

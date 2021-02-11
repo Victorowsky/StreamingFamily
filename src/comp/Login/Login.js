@@ -7,7 +7,8 @@ import Button from "../SignUp/Button";
 import Cookies from "js-cookie";
 import {DataContext} from '../../App';
 import { useContext } from "react";
-import Loading from '../Loadings/Loading';
+import LinearProgress from '../Loadings/LinearProgress';
+
 
 const Login = ({turnOffBack}) => {
 const {socket, setUserID, setNickname,setIsSuccess,setSuccessMessage, setIsError, setErrorMessage, setIsLoginPage} = useContext(DataContext)
@@ -148,13 +149,15 @@ const {socket, setUserID, setNickname,setIsSuccess,setSuccessMessage, setIsError
                 
               </form>
             </div>
+
           </div>
-        </div>
-        <div className="loadingContainer">
-                {isLoading &&  <Loading/>}
+          {/* LOGIN LOADING */}
+          {/* MADE TO TAKE 4 PX OF HEIGHT (WITHOUT IT IS ANNOYING) */}
+         {isLoading ? <LinearProgress/> : <div style={{height:'4px'}}></div>}
         </div>
 
       </div>
+      
     </>
   );
 };

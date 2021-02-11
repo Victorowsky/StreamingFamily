@@ -74,6 +74,7 @@ input:focus {
   transition: 1s;
 }
 .header {
+  margin: 5px 0;
   height: 52px;
   display: flex;
   justify-content: flex-end;
