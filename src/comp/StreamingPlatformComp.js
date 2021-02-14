@@ -44,7 +44,11 @@ const StreamingPlatformComp = ({color, streamingPlatform}) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  socket.on("getParitesDataAnswer", (docs) => {
+
+
+
+  useEffect(()=>{
+      socket.on("getParitesDataAnswer", (docs) => {
     setPartiesData(docs);
   });
   // WHEN SOMEONE WILL ADD NEW PARTY
@@ -91,6 +95,17 @@ const StreamingPlatformComp = ({color, streamingPlatform}) => {
       setErrorMessage(message);
     }
   });
+
+  return ()=>{
+    socket.off('createPartyAnswer')
+    socket.off('updateParty')
+    socket.off('joinPartyAnswer')
+    socket.off('newPartyAddedAnswer')
+    socket.off('getParitesDataAnswer')
+
+  }
+  },[partiesData, setErrorMessage, setIsError, setIsSuccess, setSuccessMessage, socket, streamingPlatform])
+
 
   const list = partiesData.map((party) => (
     <Party
