@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Button from "../SignUp/Button";
 import "./ChangePassword.css";
 import { DataContext } from "../../App";
@@ -33,6 +33,10 @@ const ChangePassowrd = () => {
       setChangePasswordClicked(true)
   }
 
+
+
+
+  useEffect(()=>{
   socket.on('changePasswordCodeAnswer', ({message, success})=>{
     if(success){
         setIsSuccess(success)
@@ -54,6 +58,11 @@ const ChangePassowrd = () => {
     }
   });
 
+  return ()=>{
+    socket.off('changePasswordAnswer')
+    socket.off('changePasswordCodeAnswer')
+  }
+  },[setErrorMessage, setIsError, setIsSuccess, setSuccessMessage, socket])
 
   const divStyle = { width: "fit-content", height:'fit-content', alignSelf:'center', padding:'15px 20px',backgroundColor:'transparent' }
 

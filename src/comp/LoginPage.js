@@ -1,4 +1,4 @@
-import React, { useContext, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import Login from "./Login/Login";
 import { Link } from "react-router-dom";
 import Button from "./SignUp/Button";
@@ -32,14 +32,22 @@ const LoginPage = () => {
     }
   };
 
-  socket.on("forgotPasswordCodeAnswer", ({ message, success }) => {
-    if (success) {
-      setIsSuccess(true);
-      setSuccessMessage(message);
-    } else {
-      setIsError(true);
+  useEffect(()=>{
+    socket.on("forgotPasswordCodeAnswer", ({ message, success }) => {
+      if (success) {
+        setIsSuccess(true);
+        setSuccessMessage(message);
+      } else {
+        setIsError(true);
+      }
+    });
+
+    return ()=>{
+      socket.off('forgotPasswordCodeAnswer')
     }
-  });
+  },[setIsError, setIsSuccess, setSuccessMessage, socket])
+
+
 
   return (
     <div

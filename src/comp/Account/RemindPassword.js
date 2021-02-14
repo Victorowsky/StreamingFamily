@@ -32,15 +32,7 @@ const RemindPassword = () => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   },[])
 
-  socket.on('remindPasswordCheckCodeAnswer', ({success, userID})=>{
-      if(!success){
-        history.push('/')
-      }else{
- 
-        setTempUserID(userID)
 
-      }
-  })
 
   const handlePasswordChange = () =>{
       if(password === passwordConfirm && tempUserID){
@@ -51,7 +43,8 @@ const RemindPassword = () => {
       }
   } 
 
-  socket.on('remindPasswordChangeAnswer', ({message, success})=>{
+  useEffect(()=>{
+    socket.on('remindPasswordChangeAnswer', ({message, success})=>{
       if(success){
           setIsSuccess(true)
           setSuccessMessage(message)
@@ -64,6 +57,24 @@ const RemindPassword = () => {
 
       }
   })
+
+
+  socket.on('remindPasswordCheckCodeAnswer', ({success, userID})=>{
+    if(!success){
+      history.push('/')
+    }else{
+
+      setTempUserID(userID)
+
+    }
+})
+
+  return ()=>{
+    socket.off('remindPasswordChangeAnswer')
+    socket.off('remindPasswordCheckCodeAnswer')
+  }
+  },[history, setIsError, setIsSuccess, setSuccessMessage, socket])
+
 
     
 

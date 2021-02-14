@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Button from "../SignUp/Button";
 import "./ChangeEmail.css";
 import { DataContext } from "../../App";
@@ -39,6 +39,10 @@ const ChangePassowrd = () => {
         setChangeEmailClicked(true)
   }
 
+
+
+  useEffect(()=>{
+
   socket.on('changeEmailCodeAnswer', ({message, success})=>{
     if(success){
         setIsSuccess(success)
@@ -59,6 +63,11 @@ const ChangePassowrd = () => {
     }
   });
 
+  return ()=>{
+    socket.off('changeEmailCodeAnswer')
+    socket.off('changeEmailAnswer')
+  }
+  },[setErrorMessage, setIsError, setIsSuccess, setSuccessMessage, socket])
 
   const divStyle = { width: "fit-content", height:'fit-content', alignSelf:'center', padding:'15px 20px',backgroundColor:'transparent' }
 
