@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Button from '../SignUp/Button';
 import {Redirect} from 'react-router-dom';
 import {DataContext} from '../../App';
@@ -20,6 +20,9 @@ const ConfirmAccount = () => {
         socket.emit('sendValidationCode', {userID, ValidateToken})
     }}
 
+
+    useEffect(()=>{
+
     socket.on('sendValidationCodeAnswer', ({message, success})=>{
         if(success){
         setIsSuccess(success)
@@ -30,6 +33,11 @@ const ConfirmAccount = () => {
             setErrorMessage(message)
         }
     })
+
+    return ()=>{
+        socket.removeAllListeners('sendValidationCodeAnswer')
+    }
+    },[setErrorMessage, setIsError, setIsSuccess, setSuccessMessage, socket])
 
 
 

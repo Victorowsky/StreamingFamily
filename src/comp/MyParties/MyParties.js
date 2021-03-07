@@ -23,10 +23,19 @@ const MyParties = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
     },[])
 
+    useEffect(()=>{
+      
     socket.on('getMyPartiesAnswer', (partiesAnswer)=>{
     setMyPartiesData(partiesAnswer)
     })
+
+
+    return ()=>{
+      socket.removeAllListeners('getMyPartiesAnswer')
+    }
     
+    },[socket])
+
     // sorting Parties
     let netflixParties = [], spotifyParties=[], hbogoParties=[], disneyParties=[];
 

@@ -70,8 +70,8 @@ const RemindPassword = () => {
 })
 
   return ()=>{
-    socket.off('remindPasswordChangeAnswer')
-    socket.off('remindPasswordCheckCodeAnswer')
+    socket.removeAllListeners('remindPasswordChangeAnswer')
+    socket.removeAllListeners('remindPasswordCheckCodeAnswer')
   }
   },[history, setIsError, setIsSuccess, setSuccessMessage, socket])
 

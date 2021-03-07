@@ -32,7 +32,8 @@ const PartyInfo = (props) => {
     }
   }, [nickname, partyID, socket]);
 
-  socket.on("getPartyAnswer", ({ docs, success, message }) => {
+  useEffect(()=>{
+      socket.on("getPartyAnswer", ({ docs, success, message }) => {
     if (success) {
       setPartyData(docs);
     } else {
@@ -44,6 +45,16 @@ const PartyInfo = (props) => {
   socket.on(`messageAnswer${partyID}`, (docs) => {
     setPartyData(docs);
   });
+
+
+
+  return ()=>{
+    socket.removeAllListeners('getPartyAnswer')
+    socket.removeAllListeners(`messageAnswer${partyID}`)
+  }
+  },[partyID, setErrorMessage, setIsError, socket])
+
+
 
   const handleSendMessage = (e) => {
     if (e) {

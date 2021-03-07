@@ -33,16 +33,15 @@ function App() {
   const [errorMessage, setErrorMessage] = useState("Try again!");
   const [isLoginPage, setIsLoginPage] = useState(false);
 
-
-  useEffect(()=>{
+  useEffect(() => {
     socket.on("CheckUserIDAnswer", (data) => {
       setUserData(data);
       setNickname(data.username);
     });
-    return ()=>{
-      socket.off('CheckUserIDAnswer')
-    }
-  },[])
+    return () => {
+      socket.removeAllListeners("CheckUserIDAnswer");
+    };
+  }, []);
 
   useEffect(() => {
     if (Cookies.get("userID")) {

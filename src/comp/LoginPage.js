@@ -43,7 +43,7 @@ const LoginPage = () => {
     });
 
     return ()=>{
-      socket.off('forgotPasswordCodeAnswer')
+      socket.removeAllListeners('forgotPasswordCodeAnswer')
     }
   },[setIsError, setIsSuccess, setSuccessMessage, socket])
 

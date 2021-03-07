@@ -1,73 +1,76 @@
 .accountContent {
-  font-size: 22px;
-  display: flex;
-  flex-direction: column;
-  color: white;
-  justify-items: center;
-  align-items: center;
+	font-size: 22px;
+	display: flex;
+	flex-direction: column;
+	color: white;
+	justify-items: center;
+	align-items: center;
 }
 .accountContent h1 {
-  text-transform: uppercase;
+	text-transform: uppercase;
 }
 
 .account {
-  display: flex;
-  background-color: white;
-  color: black;
-  border-radius: 5px;
-  flex-wrap: wrap;
-  box-shadow: 2px 0px 20px black;
+	display: flex;
+	background-color: white;
+	color: black;
+	border-radius: 5px;
+	flex-wrap: wrap;
+	box-shadow: 2px 0px 20px black;
 }
 .leftPanel {
-  display: flex;
-  flex-direction: column;
-  border-right: 2px solid black;
-  text-align: center;
+	display: flex;
+	flex-direction: column;
+	border-right: 2px solid black;
+	text-align: center;
 }
 .leftPanelItem {
-  padding: 15px 20px;
-  margin: 0;
-  cursor: pointer;
+	padding: 15px 20px;
+	margin: 0;
+	cursor: pointer;
 }
 .leftPanelItem:hover {
-  background-color: grey;
+	background-color: grey;
+}
+.leftPanelItem:nth-child(1) {
+	border-radius: 5px 0 0 0;
 }
 
 .rightPanel {
-  color: white;
-  background-color: #353535;
-  border-radius: 0 3px 3px 0;
-  display: flex;
-  justify-content: center;
-  min-width: 367px;
+	color: white;
+	background-color: #353535;
+	border-radius: 0 3px 3px 0;
+	display: flex;
+	justify-content: center;
+	min-width: 367px;
 }
 .accountInfo {
-  flex: 1;
+	flex: 1;
 }
 .rightPanel .accountInfo div {
-  box-sizing: border-box;
-  flex-direction: column;
-  display: flex;
-  width: 100%;
-  padding: 15px 20px;
+	box-sizing: border-box;
+	flex-direction: column;
+	display: flex;
+	width: 100%;
+	padding: 15px 20px;
 }
 
 .rightPanel div:nth-child(2n) {
-  background-color: #302f2f;
+	background-color: #302f2f;
 }
 
 @media (max-width: 620px) {
-  .accountInfo {
-    width: 100%;
-    border-bottom: 2px solid black;
-    border-right: 0px solid black;
-  }
-  .rightPanel {
-    width: 100%;
-  }
-  .leftPanel {
-    border-right: none;
-    border-bottom: 2px solid black;
-    width: 100%;
-  }
+	.accountInfo {
+		width: 100%;
+		border-bottom: 2px solid black;
+		border-right: 0px solid black;
+	}
+	.rightPanel {
+		width: 100%;
+	}
+	.leftPanel {
+		border-right: none;
+		border-bottom: 2px solid black;
+		width: 100%;
+	}
 } ;

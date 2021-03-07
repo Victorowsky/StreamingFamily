@@ -76,7 +76,9 @@ const SignUp = () => {
     }
   };
 
-  socket.on("SignUpAnswer", (answer) => {
+
+useEffect(()=>{
+ socket.on("SignUpAnswer", (answer) => {
     if (answer.success) {
       setIsSuccess(true);
       setName("");
@@ -105,6 +107,16 @@ const SignUp = () => {
     }
 
 })
+
+
+return ()=>{
+  socket.removeAllListeners('SignUpAnswer')
+  socket.removeAllListeners('sendValidationCodeAnswer')
+}
+  
+},[history, setErrorMessage, setIsError, setIsSuccess, setSuccessMessage, setUserID, socket])
+
+ 
 
   return (
     <>

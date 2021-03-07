@@ -89,7 +89,7 @@ const Login = ({ turnOffBack }) => {
     });
 
     return ()=>{
-      socket.off('LoginAnswer')
+      socket.removeAllListeners('LoginAnswer')
     }
 
   }, [socket, history, setErrorMessage, setNickname, username, setIsSuccess, setSuccessMessage, setUserID, setIsLoginPage, setIsError]);

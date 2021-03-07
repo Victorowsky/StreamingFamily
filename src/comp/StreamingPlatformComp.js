@@ -97,11 +97,11 @@ const StreamingPlatformComp = ({color, streamingPlatform}) => {
   });
 
   return ()=>{
-    socket.off('createPartyAnswer')
-    socket.off('updateParty')
-    socket.off('joinPartyAnswer')
-    socket.off('newPartyAddedAnswer')
-    socket.off('getParitesDataAnswer')
+    socket.removeAllListeners('createPartyAnswer')
+    socket.removeAllListeners('updateParty')
+    socket.removeAllListeners('joinPartyAnswer')
+    socket.removeAllListeners('newPartyAddedAnswer')
+    socket.removeAllListeners('getParitesDataAnswer')
 
   }
   },[partiesData, setErrorMessage, setIsError, setIsSuccess, setSuccessMessage, socket, streamingPlatform])

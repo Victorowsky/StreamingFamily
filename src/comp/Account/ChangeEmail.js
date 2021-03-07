@@ -64,8 +64,8 @@ const ChangePassowrd = () => {
   });
 
   return ()=>{
-    socket.off('changeEmailCodeAnswer')
-    socket.off('changeEmailAnswer')
+    socket.removeAllListeners('changeEmailCodeAnswer')
+    socket.removeAllListeners('changeEmailAnswer')
   }
   },[setErrorMessage, setIsError, setIsSuccess, setSuccessMessage, socket])
 

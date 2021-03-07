@@ -14,7 +14,7 @@ import { blue } from "@material-ui/core/colors";
 
 
 let usersCopy;
-let adminCopy;
+
 const emails = ["username@gmail.com", "user02@gmail.com"];
 const useStyles = makeStyles({
   avatar: {
@@ -73,7 +73,6 @@ export default function SimpleDialogDemo({ users, admin }) {
   const [selectedValue, setSelectedValue] = React.useState(emails[1]);
 
   usersCopy = users;
-  adminCopy = admin;
   const handleClickOpen = () => {
     setOpen(true);
   };
